@@ -1,7 +1,7 @@
 # FLAGS=-Wall -Werror -Wextra -std=c11
 FLAGS=-Wall -Wextra -std=c11
 CC=gcc $(FLAGS)
-FILE=s21_matrix
+FILE=s21_calc
 FILETEST=tests/*
 FILEREPORT=s21_test_report
 FILETESTO=s21_test

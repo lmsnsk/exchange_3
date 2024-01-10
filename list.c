@@ -1,0 +1,65 @@
+#include "s21_smart_calc.h"
+
+List* init_stack(double value, int priority, type_t value_type) {
+  List* element = (List*)calloc(1, sizeof(List));
+  if (element) {
+    element->value = value;
+    element->priority = priority;
+    element->value_type = value_type;
+    element->next = NULL;
+  }
+  return element;
+}
+
+List* push_stack(double value, int priority, type_t value_type, List* root) {
+  List* tmp = (List*)calloc(1, sizeof(List));
+  if (tmp) {
+    tmp->value = value;
+    tmp->priority = priority;
+    tmp->value_type = value_type;
+    tmp->next = NULL;
+    if (root) {
+      List* p = root;
+      while (p->next) p = p->next;
+      p->next = tmp;
+    } else {
+      root = tmp;
+    }
+  }
+  return root;
+}
+
+List* pop_stack(List* root) {
+  if (root) {
+    List* p = root;
+    List* tmp = root;
+    if (!root->next) {
+      root = NULL;
+    } else {
+      while (tmp->next->next) tmp = tmp->next;
+      p = tmp->next;
+      tmp->next = NULL;
+    }
+    free(p);
+  }
+  return root;
+}
+
+List* peek_stack(List* root) {
+  if (root) {
+    List* tmp = root;
+    if (root->next) {
+      while (tmp->next->next) tmp = tmp->next;
+      root = tmp->next;
+    }
+  }
+  return root;
+}
+
+void destroy_stack(List* root) {
+  while (root) {
+    List* tmp = root;
+    root = root->next;
+    free(tmp);
+  }
+}
