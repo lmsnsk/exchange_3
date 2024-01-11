@@ -11,30 +11,29 @@ List* init_stack(double value, int priority, type_t value_type) {
   return element;
 }
 
-List* push_stack(double value, int priority, type_t value_type, List* root) {
+void push_stack(double value, int priority, type_t value_type, List** root) {
   List* tmp = (List*)calloc(1, sizeof(List));
   if (tmp) {
     tmp->value = value;
     tmp->priority = priority;
     tmp->value_type = value_type;
     tmp->next = NULL;
-    if (root) {
-      List* p = root;
+    if (*root) {
+      List* p = *root;
       while (p->next) p = p->next;
       p->next = tmp;
     } else {
-      root = tmp;
+      *root = tmp;
     }
   }
-  return root;
 }
 
-List* pop_stack(List* root) {
+void pop_stack(List** root) {
   if (root) {
-    List* p = root;
-    List* tmp = root;
-    if (!root->next) {
-      root = NULL;
+    List* p = *root;
+    List* tmp = *root;
+    if (!p->next) {
+      *root = NULL;
     } else {
       while (tmp->next->next) tmp = tmp->next;
       p = tmp->next;
@@ -42,7 +41,6 @@ List* pop_stack(List* root) {
     }
     free(p);
   }
-  return root;
 }
 
 List* peek_stack(List* root) {

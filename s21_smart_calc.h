@@ -57,7 +57,7 @@ int validator(char* str);
 /// @brief разбивка строки на лексемы
 /// @param str указатель на строку выражения
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
-int parcer(List* list, char* str);
+int parcer(List** list, char* str);
 
 /// @brief инициализация первого элемента стека
 /// @param value числовое значение элемента
@@ -71,13 +71,12 @@ List* init_stack(double value, int priority, type_t value_type);
 /// @param priority значение приоритета
 /// @param value_type тип элемента
 /// @param root указать на первый элемент стека
-/// @return  указать на первый элемент стека
-List* push_stack(double value, int priority, type_t value_type, List* root);
+void push_stack(double value, int priority, type_t value_type, List** root);
 
 /// @brief удаление последнего элемента стека
 /// @param root указать на первый элемент стека
 /// @return указать на первый элемент стека
-List* pop_stack(List* root);
+void pop_stack(List** root);
 
 /// @brief получение последнего элемента стека
 /// @param root указать на первый элемент стека

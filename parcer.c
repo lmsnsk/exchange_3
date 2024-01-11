@@ -1,6 +1,6 @@
 #include "s21_smart_calc.h"
 
-void parse_3_char_oper(List* main_stack, int* result, const char* str, int* i,
+void parse_3_char_oper(List** main_stack, int* result, const char* str, int* i,
                        type_t type, char c1, char c2) {
   if (str[*i + 1] == c1 && str[*i + 2] == c2) {
     push_stack(0.0, 4, type, main_stack);
@@ -9,7 +9,7 @@ void parse_3_char_oper(List* main_stack, int* result, const char* str, int* i,
     *result = ERROR;
 }
 
-void parse_4_char_oper(List* main_stack, int* result, const char* str, int* i,
+void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
                        type_t type, char c1, char c2, char c3) {
   if (str[*i + 1] == c1 && str[*i + 2] == c2 && str[*i + 3] == c3) {
     push_stack(0.0, 4, type, main_stack);
@@ -35,7 +35,7 @@ double parse_number(const char* str, int* i) {
   return num;
 }
 
-int parcer(List* list, char* str) {
+int parcer(List** list, char* str) {
   int result = OK, i = 0;
   while (str[i]) {
     if (is_number(str[i])) {
