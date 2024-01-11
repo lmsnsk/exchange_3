@@ -4,10 +4,12 @@
 
 #define OK 0
 #define ERROR 1
+#define MAX_SIZE 256
 
 typedef enum {
   NUMBER,
-  BRACKET,
+  O_BRACKET,
+  C_BRACKET,
   PLUS,
   MINUS,
   MUL,
@@ -52,12 +54,36 @@ int delete_speces(char* str);
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
 int validator(char* str);
 
+/// @brief разбивка строки на лексемы
+/// @param str указатель на строку выражения
+/// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
+int parcer(List* list, char* str);
+
+/// @brief инициализация первого элемента стека
+/// @param value числовое значение элемента
+/// @param priority значение приоритета
+/// @param value_type тип элемента
+/// @return  указать на первый элемент стека
 List* init_stack(double value, int priority, type_t value_type);
 
+/// @brief добавление элемента в стек
+/// @param value числовое значение элемента
+/// @param priority значение приоритета
+/// @param value_type тип элемента
+/// @param root указать на первый элемент стека
+/// @return  указать на первый элемент стека
 List* push_stack(double value, int priority, type_t value_type, List* root);
 
+/// @brief удаление последнего элемента стека
+/// @param root указать на первый элемент стека
+/// @return указать на первый элемент стека
 List* pop_stack(List* root);
 
+/// @brief получение последнего элемента стека
+/// @param root указать на первый элемент стека
+/// @return указать на последний элемент стека
 List* peek_stack(List* root);
 
+/// @brief очистка стека
+/// @param root указать на первый элемент стека
 void destroy_stack(List* root);

@@ -2,7 +2,7 @@
 
 int is_number(int c) {
   int result = 0;
-  if ((c > '0' && c < '9') || c == '.' || c == ',') result = 1;
+  if ((c >= '0' && c <= '9') || c == '.' || c == ',') result = 1;
   return result;
 }
 
@@ -24,7 +24,7 @@ int delete_speces(char *str) {
         break;
       }
       char str_current_char[2];
-      str_current_char[0] = str[i];
+      str_current_char[0] = (str[i] == ',') ? '.' : str[i];
       str_current_char[1] = '\0';
       strcat(temp_str, str_current_char);
       check_num = 0;

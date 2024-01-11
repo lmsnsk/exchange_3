@@ -1,27 +1,31 @@
 #include "s21_smart_calc.h"
 
 int main(void) {
-  // char str[] = " (54-(-3))-(() .44 + 2,88)   ";
+  List* input_stack = init_stack(666.666, 999, 999);  //// witout init - sega
+  char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
-  // int er = validator(str);
-  // if (er)
-  //   printf("ERROR: Invalid exptession!\n");
-  // else
-  //   printf("%s\n", str);
+  int er = validator(str);
+  er = parcer(input_stack, str) || er;
 
-  List* list = init_stack(1.0, 1, 1);
-  list = push_stack(2.0, 1, 1, list);
-  list = push_stack(3.0, 1, 1, list);
-  list = push_stack(4.0, 1, 1, list);
+  if (er)
+    printf("ERROR: Invalid exptession!\n--------------------------\n");
+  else
+    printf("Infix expression:\n%s\n", str);
 
-  list = pop_stack(list);
-  if (list) {
-    List* p = list;
+  // input_stack = push_stack(2.0, 1, 1, input_stack);
+  // input_stack = push_stack(3.0, 1, 1, input_stack);
+  // input_stack = push_stack(4.0, 1, 1, input_stack);
+  // input_stack = pop_stack(input_stack);
+
+  if (input_stack) {
+    List* p = input_stack;
+    printf("Input stack\n");
     while (p) {
-      printf("%f\n", p->value);
+      printf("value: %10f| priority: %3d| type: %3d\n", p->value, p->priority,
+             p->value_type);
       p = p->next;
     }
-    destroy_stack(list);
+    destroy_stack(input_stack);
   }
   return 0;
 }
