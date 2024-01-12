@@ -34,20 +34,14 @@ typedef struct List {
   struct List* next;
 } List;
 
+void print_stack(List* stack);
+
+void print_stack_str(List* stack);
+
 /// @brief определяет, является ли символ числом
 /// @param c передаваемый символ
 /// @return 1 - символ является числом, 0 - символ не является числом
 int is_number(int c);
-
-/// @brief определяет, является ли символ арифметическим знаком
-/// @param c передаваемый символ
-/// @return 1 - символ является знаком, 0 - символ не является знаком
-int is_arithmetic(int c);
-
-/// @brief удаление всех пробелов строки
-/// @param str редактируемая строка
-/// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
-int delete_speces(char* str);
 
 /// @brief проверка выражения на корректность
 /// @param str указатель на строку выражения
@@ -86,3 +80,9 @@ List* peek_stack(List* root);
 /// @brief очистка стека
 /// @param root указать на первый элемент стека
 void destroy_stack(List* root);
+
+/// @brief перевод в обратную польскую нотацию
+/// @param input_stack указатель на входной стек
+/// @param output_stack выходной стек
+/// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
+int to_reverse_polish_notation(List* input_stack, List** output_stack);

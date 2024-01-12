@@ -29,17 +29,18 @@ void push_stack(double value, int priority, type_t value_type, List** root) {
 }
 
 void pop_stack(List** root) {
-  if (root) {
-    List* p = *root;
-    List* tmp = *root;
-    if (!p->next) {
-      *root = NULL;
-    } else {
+  List* p = *root;
+  if (p) {
+    if (p->next) {
+      List* tmp = *root;
       while (tmp->next->next) tmp = tmp->next;
       p = tmp->next;
       tmp->next = NULL;
+      free(p);
+    } else {
+      free(p);
+      *root = NULL;
     }
-    free(p);
   }
 }
 
