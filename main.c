@@ -3,7 +3,7 @@
 int main(void) {
   List* input_stack = {0};
   List* output_stack = {0};
-  char str[] = "(2 + 2 -10 mod 2*3)";
+  char str[] = "+(-cos-2 + 2*2 -10 mod 2*3) + 3 -(-cos(-300 * 3))";
   // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
@@ -20,15 +20,15 @@ int main(void) {
     // pop_stack(&input_stack);
 
     if (input_stack) {
-      printf("Input stack\n");
-      print_stack(input_stack);
+      // printf("Input stack\n");
+      // print_stack(input_stack);
       printf("\n");
       print_stack_str(input_stack);
     }
     if (output_stack) {
-      printf("\n");
-      printf("Output stack\n");
-      print_stack(output_stack);
+      //   printf("\n");
+      //   printf("Output stack\n");
+      //   print_stack(output_stack);
       printf("\n");
       print_stack_str(output_stack);
     }
@@ -51,7 +51,7 @@ void print_stack_str(List* stack) {
   List* p = stack;
   while (p) {
     if (p->value_type == NUMBER)
-      printf("%f", p->value);
+      printf("%g", p->value);
     else if (p->value_type == O_BRACKET)
       printf("(");
     else if (p->value_type == C_BRACKET)
@@ -60,6 +60,10 @@ void print_stack_str(List* stack) {
       printf("+");
     else if (p->value_type == MINUS)
       printf("-");
+    // else if (p->value_type == U_PLUS)
+    //   printf("");
+    else if (p->value_type == U_MINUS)
+      printf("~");
     else if (p->value_type == MUL)
       printf("*");
     else if (p->value_type == SUB)

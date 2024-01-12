@@ -12,6 +12,8 @@ typedef enum {
   C_BRACKET,
   PLUS,
   MINUS,
+  U_PLUS,
+  U_MINUS,
   MUL,
   SUB,
   EXP,

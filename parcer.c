@@ -36,6 +36,14 @@ double parse_number(const char* str, int* i) {
   return num;
 }
 
+void plus_minus(List** list, char* str, int i, int is_minus) {
+  if (i && (str[i - 1] == ')' || is_number(str[i - 1])))
+    push_stack(0.0, 1, (is_minus ? MINUS : PLUS), list);
+  else {
+    push_stack(0.0, 5, (is_minus ? U_MINUS : U_PLUS), list);
+  }
+}
+
 int parcer(List** list, char* str) {
   int result = OK, i = 0;
   while (str[i]) {
@@ -52,10 +60,10 @@ int parcer(List** list, char* str) {
         push_stack(0.0, -1, C_BRACKET, list);
         break;
       case '+':
-        push_stack(0.0, 1, PLUS, list);
+        plus_minus(list, str, i, 0);
         break;
       case '-':
-        push_stack(0.0, 1, MINUS, list);
+        plus_minus(list, str, i, 1);
         break;
       case '*':
         push_stack(0.0, 2, MUL, list);
