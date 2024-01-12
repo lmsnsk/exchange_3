@@ -3,8 +3,8 @@
 int main(void) {
   List* input_stack = {0};
   List* output_stack = {0};
-  // char str[] = "(2 + 2 - cos(60^55))";
-  char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
+  char str[] = "(2 + 2 ())- cos(60^55))";
+  // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
   er = parcer(&input_stack, str) || er;
@@ -13,27 +13,28 @@ int main(void) {
   if (er) {
     printf("ERROR: Invalid exptession!\n");
     printf("--------------------------\n");
-  } else
+  } else {
     printf("Infix expression:\n%s\n", str);
 
-  // push_stack(2.0, 1, 1, &input_stack);
-  // pop_stack(&input_stack);
+    // push_stack(2.0, 1, 1, &input_stack);
+    // pop_stack(&input_stack);
 
-  if (input_stack) {
-    printf("Input stack\n");
-    print_stack(input_stack);
-    printf("\n");
-    print_stack_str(input_stack);
-    destroy_stack(input_stack);
+    if (input_stack) {
+      printf("Input stack\n");
+      print_stack(input_stack);
+      printf("\n");
+      print_stack_str(input_stack);
+    }
+    if (output_stack) {
+      printf("\n");
+      printf("Output stack\n");
+      print_stack(output_stack);
+      printf("\n");
+      print_stack_str(output_stack);
+    }
   }
-  if (output_stack) {
-    printf("\n");
-    printf("Output stack\n");
-    print_stack(output_stack);
-    printf("\n");
-    print_stack_str(output_stack);
-    destroy_stack(output_stack);
-  }
+  if (input_stack) destroy_stack(input_stack);
+  if (output_stack) destroy_stack(output_stack);
   return 0;
 }
 

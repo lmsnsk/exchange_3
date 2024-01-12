@@ -13,10 +13,11 @@ int to_reverse_polish_notation(List *input, List **output) {
       push_stack(input->value, input->priority, input->value_type, &support);
 
     } else if (input->value_type == C_BRACKET) {
-      while ((peek_stack(support))->value_type != O_BRACKET) {
-        p = peek_stack(support);
+      p = peek_stack(support);
+      while (p && p->value_type != O_BRACKET) {
         push_stack(p->value, p->priority, p->value_type, output);
         pop_stack(&support);
+        p = peek_stack(support);
       }
       pop_stack(&support);
 
