@@ -3,7 +3,8 @@
 void parse_3_char_oper(List** main_stack, int* result, const char* str, int* i,
                        type_t type, char c1, char c2) {
   if (str[*i + 1] == c1 && str[*i + 2] == c2) {
-    push_stack(0.0, 4, type, main_stack);
+    int priority = (c1 == 'o' && c2 == 'd') ? 0 : 3;
+    push_stack(0.0, priority, type, main_stack);
     *i += 2;
   } else
     *result = ERROR;
@@ -12,7 +13,7 @@ void parse_3_char_oper(List** main_stack, int* result, const char* str, int* i,
 void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
                        type_t type, char c1, char c2, char c3) {
   if (str[*i + 1] == c1 && str[*i + 2] == c2 && str[*i + 3] == c3) {
-    push_stack(0.0, 4, type, main_stack);
+    push_stack(0.0, 3, type, main_stack);
     *i += 3;
   } else
     *result = ERROR;
@@ -63,7 +64,7 @@ int parcer(List** list, char* str) {
         push_stack(0.0, 2, SUB, list);
         break;
       case '^':
-        push_stack(0.0, 3, EXP, list);
+        push_stack(0.0, 4, EXP, list);
         break;
       case 'm':
         parse_3_char_oper(list, &result, str, &i, MOD, 'o', 'd');

@@ -3,7 +3,7 @@
 int main(void) {
   List* input_stack = {0};
   List* output_stack = {0};
-  char str[] = "(2 + 2 ())- cos(60^55))";
+  char str[] = "(2 + 2 -10 mod 2*3)";
   // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
