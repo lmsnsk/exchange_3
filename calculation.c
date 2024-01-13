@@ -36,7 +36,7 @@ void execution_un_operator(List** numbers, int type) {
   }
 }
 
-void execution_bin_operator(List** numbers, int type, int* error) {
+void execution_bin_operator(List** numbers, int type, int* result) {
   List* p = peek_stack(*numbers);
   double value_2 = p->value;
   pop_stack(numbers);
@@ -60,15 +60,16 @@ void execution_bin_operator(List** numbers, int type, int* error) {
       break;
     default:
       if (round(value_1) == value_1 && round(value_2) == value_2)  ////////
-        p->value = (double)((int)value_1 % (int)value_2);
-      else
-        *error = 1;
+        p->value = (double)((int)value_1 % (int)value_2);  ////////////////
+      else {
+        *result = 1;
+      }
       break;
   }
 }
 
 int calculation(List* input, List** numbers) {
-  int result = 0;
+  int result = OK;
   while (input) {
     if (input->value_type == NUMBER) {
       push_stack(input->value, input->priority, input->value_type, numbers);
@@ -83,6 +84,7 @@ int calculation(List* input, List** numbers) {
     input = input->next;
   }
   List* p = *numbers;
-  if (p->next) result = 1;
+  if (p->next) result = ERROR;
+
   return result;
 }

@@ -4,8 +4,8 @@ int main(void) {
   List* input_stack = {0};
   List* output_stack = {0};
   List* numbers = {0};
-  char str[] = "-(2+25*(3)-)";
-  // char str[] = "+(-cos-2 + 2*2 -10 mod 2*3)  -3 -(-cos(-300 * 3))";
+  // char str[] = "-(2+25*(3)-)";
+  char str[] = "+(-cos*2 + 2*2 -10 ^ 2*3)  -3 -(-cos(-300 * 3))";
   // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
