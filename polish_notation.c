@@ -8,37 +8,75 @@ int is_func(int val) {
   return result;
 }
 
-int to_reverse_polish_notation(List *input, List **output) {
-  int check = 0;
+int is_binar_operator(int val) {
   int result = 0;
-  List *p = {0};
-  List *support = {0};
+  if (val == PLUS || val == MINUS || val == MUL || val == SUB || val == MOD ||
+      val == EXP)
+    result = 1;
+  return result;
+}
+
+void number_case(List *input, List **output, int *result) {
+  if (input->next && input->next->value_type != C_BRACKET &&
+      !is_binar_operator(input->next->value_type)) {
+    *result = 1;
+  } else {
+    push_stack(input->value, input->priority, input->value_type, output);
+  }
+}
+
+void open_bracket_case(List *input, List **support, int *result) {
+  if (input->next &&
+      (input->next->value_type == MUL || input->next->value_type == SUB ||
+       input->next->value_type == EXP || input->next->value_type == MOD ||
+       input->next->value_type == C_BRACKET)) {
+    *result = 1;
+  } else {
+    push_stack(input->value, input->priority, input->value_type, support);
+  }
+}
+
+void close_bracket_case(List *input, List **support, List **output,
+                        int *result) {
+  if (input->next &&
+      (is_func(input->next->value_type) || input->next->value_type == NUMBER)) {
+    *result = 1;
+  } else {
+    List *p = {0};
+    p = peek_stack(*support);
+    while (p && p->value_type != O_BRACKET) {
+      push_stack(p->value, p->priority, p->value_type, output);
+      pop_stack(support);
+      p = peek_stack(*support);
+    }
+    pop_stack(support);
+  }
+}
+
+int to_reverse_polish_notation(List *input, List **output) {
+  int check_negative_func = 0;
+  int result = 0;
+  List *support = {0}, *p = {0};
   while (input) {
     switch (input->value_type) {
       case NUMBER:
-        push_stack(input->value, input->priority, input->value_type, output);
-        check = 0;
+        number_case(input, output, &result);
+        check_negative_func = 0;
         break;
       case O_BRACKET:
-        push_stack(input->value, input->priority, input->value_type, &support);
-        check = 0;
+        open_bracket_case(input, &support, &result);
+        check_negative_func = 0;
         break;
       case C_BRACKET:
-        p = peek_stack(support);
-        while (p && p->value_type != O_BRACKET) {
-          push_stack(p->value, p->priority, p->value_type, output);
-          pop_stack(&support);
-          p = peek_stack(support);
-        }
-        pop_stack(&support);
+        close_bracket_case(input, &support, output, &result);
         break;
       default:
         p = peek_stack(support);
         if (p && p->priority == 5 && is_func(input->value_type))
-          check = 1;
+          check_negative_func = 1;
         else
-          check = 0;
-        while (!check && p && p->priority >= input->priority) {
+          check_negative_func = 0;
+        while (!check_negative_func && p && p->priority >= input->priority) {
           push_stack(p->value, p->priority, p->value_type, output);
           pop_stack(&support);
           p = peek_stack(support);

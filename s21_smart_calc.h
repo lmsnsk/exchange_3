@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -45,6 +46,16 @@ void print_stack_str(List* stack);
 /// @return 1 - символ является числом, 0 - символ не является числом
 int is_number(int c);
 
+/// @brief определяет, является ли тип аргумента функцией
+/// @param val передаваемый тип
+/// @return 1 - является функцией, 0 - не является функцией
+int is_func(int val);
+
+/// @brief определяет, является ли тип аргумента бинарным оператором
+/// @param val - передаваемый тип
+/// @return 1 - является , 0 - не является
+int is_binar_operator(int val);
+
 /// @brief проверка выражения на корректность
 /// @param str указатель на строку выражения
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
@@ -88,3 +99,9 @@ void destroy_stack(List* root);
 /// @param output_stack выходной стек
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
 int to_reverse_polish_notation(List* input_stack, List** output_stack);
+
+/// @brief вычисление результата
+/// @param input стек постфиксной записи
+/// @param numbers стек результатов
+/// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
+int calculation(List* input, List** numbers);

@@ -44,15 +44,18 @@ int validator(char *str) {
     if (is_arithmetic(str[i])) {
       if (str[i + 1] == '-' || str[i + 1] == '+') {
         if (i && is_arithmetic(str[i - 1])) result = ERROR;
-      } else if (is_arithmetic(str[i + 1]))
+      } else if (is_arithmetic(str[i + 1]) || str[i + 1] == ')')
         result = ERROR;
       if (!i && is_arithmetic(str[i + 1])) result = ERROR;
+
     } else if (str[i] == '(') {
       if (is_arithmetic(str[i + 1]) && str[i + 2] == ')') result = ERROR;
       bracket++;
+
     } else if (str[i] == ')') {
       if (bracket < 1) result = ERROR;
       bracket--;
+
     } else if (str[i] == '.' || str[i] == ',') {
       if ((str[i - 1] < '0' || str[i - 1] > '9') &&
           (str[i + 1] < '0' || str[i + 1] > '9')) {

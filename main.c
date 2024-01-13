@@ -3,13 +3,15 @@
 int main(void) {
   List* input_stack = {0};
   List* output_stack = {0};
-  char str[] = "     +2-4";
+  List* numbers = {0};
+  char str[] = "-(2+25*(3)-)";
   // char str[] = "+(-cos-2 + 2*2 -10 mod 2*3)  -3 -(-cos(-300 * 3))";
   // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
-  er = parcer(&input_stack, str) || er;
-  er = to_reverse_polish_notation(input_stack, &output_stack) || er;
+  if (!er) er = parcer(&input_stack, str);
+  if (!er) er = to_reverse_polish_notation(input_stack, &output_stack);
+  if (!er) er = calculation(output_stack, &numbers);
 
   if (er) {
     printf("ERROR: Invalid exptession!\n");
@@ -33,9 +35,14 @@ int main(void) {
       printf("\n");
       print_stack_str(output_stack);
     }
+    if (output_stack) {
+      printf("\n");
+      print_stack_str(numbers);
+    }
   }
   if (input_stack) destroy_stack(input_stack);
   if (output_stack) destroy_stack(output_stack);
+  if (numbers) destroy_stack(numbers);
   return 0;
 }
 
@@ -61,8 +68,6 @@ void print_stack_str(List* stack) {
       printf("+");
     else if (p->value_type == MINUS)
       printf("-");
-    // else if (p->value_type == U_PLUS)
-    //   printf("");
     else if (p->value_type == U_MINUS)
       printf("~");
     else if (p->value_type == MUL)
