@@ -53,6 +53,7 @@ void close_bracket_case(List *input, List **support, List **output,
   }
 }
 
+// print_stack_str(*support);
 void operators_case(List *input, List **support, List **output,
                     int *check_negative_func, int *result) {
   List *p = peek_stack(*support);
@@ -71,7 +72,7 @@ void operators_case(List *input, List **support, List **output,
     pop_stack(support);
     p = peek_stack(*support);
   }
-  if (!result) {
+  if (!*result) {
     push_stack(input->value, input->priority, input->value_type, support);
   }
 }

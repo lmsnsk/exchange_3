@@ -5,7 +5,7 @@ int main(void) {
   List* output_stack = {0};
   List* numbers = {0};
   // char str[] = "-(2+25*(3)-)";
-  char str[] = "+(-cos*2 + 2*2 -10 ^ 2*3)  -3 -(-cos(-300 * 3))";
+  char str[] = "2+2";
   // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
@@ -14,7 +14,7 @@ int main(void) {
   if (!er) er = calculation(output_stack, &numbers);
 
   if (er) {
-    printf("ERROR: Invalid exptession!\n");
+    printf("ERROR: Invalid expression!\n");
     printf("--------------------------\n");
   } else {
     printf("Infix expression:\n%s\n", str);

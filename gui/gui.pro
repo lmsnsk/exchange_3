@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,10 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    ../calculation.c \
+    ../list.c \
+    ../parcer.c \
+    ../polish_notation.c \
+    ../validator.c
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    ../s21_smart_calc.h
 
 FORMS += \
     mainwindow.ui
