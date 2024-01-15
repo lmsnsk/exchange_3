@@ -5,7 +5,7 @@ int main(void) {
   List* output_stack = {0};
   List* numbers = {0};
   // char str[] = "-(2+25*(3)-)";
-  char str[] = "2+2";
+  char str[] = "2.2+2.2";
   // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
 
   int er = validator(str);
@@ -39,6 +39,7 @@ int main(void) {
       printf("\n");
       print_stack_str(numbers);
     }
+    printf("%f\n", numbers->value);
   }
   if (input_stack) destroy_stack(input_stack);
   if (output_stack) destroy_stack(output_stack);

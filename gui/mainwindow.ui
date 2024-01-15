@@ -72,6 +72,9 @@ QPushButton::pressed {
         <pointsize>14</pointsize>
        </font>
       </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
      </widget>
     </item>
     <item>

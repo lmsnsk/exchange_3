@@ -9,6 +9,7 @@ extern "C" {
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+  ui->inputField->setAlignment(Qt::AlignRight);
   //  ui->btn_0->setStyleSheet("color: red");
 }
 
@@ -53,16 +54,18 @@ void MainWindow::on_result_clicked() {
   QString qstr = ui->inputField->text();
   QByteArray ba = qstr.toLocal8Bit();
   char* str = ba.data();
-  std::cout << str;
   int er = validator(str);
-  if (!er) er = parcer(&input_stack, str);
-  if (!er) er = to_reverse_polish_notation(input_stack, &output_stack);
-  if (!er) er = calculation(output_stack, &numbers);
-  if (!er) {
-    // double result = numbers->value;
-    qDebug() << qstr;
-  } else {
-    ui->inputField->setText("ERROR: Invalid Expression!");
+  if (*str) {
+    if (!er) er = parcer(&input_stack, str);
+    if (!er) er = to_reverse_polish_notation(input_stack, &output_stack);
+    if (!er) er = calculation(output_stack, &numbers);
+    if (!er) {
+      QString toStr = QString::number(numbers->value, 'g', 16);
+      ui->inputField->setText(toStr);
+      qDebug() << numbers->value;
+    } else {
+      ui->inputField->setText("ERROR: Invalid Expression!");
+    }
   }
 
   if (input_stack) destroy_stack(input_stack);
