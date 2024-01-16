@@ -1,16 +1,5 @@
 #include "s21_smart_calc.h"
 
-// List* init_stack(double value, int priority, type_t value_type) {
-//   List* element = (List*)calloc(1, sizeof(List));
-//   if (element) {
-//     element->value = value;
-//     element->priority = priority;
-//     element->value_type = value_type;
-//     element->next = NULL;
-//   }
-//   return element;
-// }
-
 void push_stack(double value, int priority, type_t value_type, List** root) {
   List* tmp = (List*)calloc(1, sizeof(List));
   if (tmp) {

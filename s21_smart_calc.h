@@ -6,6 +6,7 @@
 
 #define OK 0
 #define ERROR 1
+#define EMPTY -1
 #define MAX_SIZE 256
 
 typedef enum {
@@ -59,7 +60,8 @@ int is_binar_operator(int val);
 
 /// @brief проверка выражения на корректность
 /// @param str указатель на строку выражения
-/// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
+/// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно, 2 -
+/// передана пустая строка)
 int validator(char* str);
 
 /// @brief разбивка строки на лексемы
@@ -106,3 +108,9 @@ int to_reverse_polish_notation(List* input_stack, List** output_stack);
 /// @param numbers стек результатов
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
 int calculation(List* input, List** numbers);
+
+/// @brief функция калькулятора
+/// @param str передаваемая строка выражения
+/// @return код ошибки (0 - вычисление прошло успешно, 1 - ошибка, 2 -
+/// передана пустая строка))
+int s21_smart_calc(char* str, double* result);

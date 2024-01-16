@@ -38,7 +38,9 @@ int delete_speces(char *str) {
 }
 
 int validator(char *str) {
-  if (delete_speces(str) || !*str) return ERROR;
+  if (delete_speces(str)) return ERROR;
+  if (!*str) return EMPTY;
+
   int result = OK, i = 0, bracket = 0;
   while (str[i]) {
     if (is_arithmetic(str[i])) {

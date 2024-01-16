@@ -38,19 +38,16 @@ val:
 o_files:
 	$(CC) -c *.c
 
-$(FILE).a: o_files
-	ar rcs $(LIB) *.o
-
-test: $(FILE).a
-	$(CC) $(FILETEST).c $(FILE).a -o $(FILETESTO) $(TESTFLAGS)
+test: 
+	$(CC) $(FILETEST).c *.c -o $(FILETESTO) $(TESTFLAGS)
 	./$(FILETESTO)
 
-test_val: $(FILE).a
-	$(CC) $(FILETEST).c $(FILE).a -o $(FILETESTO) $(TESTFLAGS)
+test_val: 
+	$(CC) $(FILETEST).c *.c -o $(FILETESTO) $(TESTFLAGS)
 	valgrind --tool=memcheck --log-file="valgrind_check.log" --leak-check=yes \
 	--track-origins=yes -s ./$(FILETESTO)
 
-gcov_report: $(FILE).a
+gcov_report:
 	$(CC) $(COVFLAG) $(FILETEST).c *.c -o $(FILEREPORT) $(TESTFLAGS)
 	./$(FILEREPORT)
 	lcov -t "$(FILE)" -o test.info -c -d .  

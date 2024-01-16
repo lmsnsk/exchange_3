@@ -15,7 +15,8 @@ SOURCES += \
     ../list.c \
     ../parcer.c \
     ../polish_notation.c \
-    ../validator.c
+    ../validator.c \
+    ../s21_smart_calc.c
 
 HEADERS += \
     mainwindow.h \

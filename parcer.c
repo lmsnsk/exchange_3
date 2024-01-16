@@ -119,5 +119,7 @@ int parcer(List** list, char* str) {
     if (result) break;
     i++;
   }
+  List* p = peek_stack(*list);
+  if (p->value_type > 0 && !p->next) result = ERROR;
   return result;
 }

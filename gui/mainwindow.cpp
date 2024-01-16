@@ -44,32 +44,30 @@ void MainWindow::on_log_clicked() { ui->inputField->insert("log"); }
 void MainWindow::on_mod_clicked() { ui->inputField->insert("mod"); }
 void MainWindow::on_o_brack_clicked() { ui->inputField->insert("("); }
 void MainWindow::on_c_brack_clicked() { ui->inputField->insert(")"); }
-void MainWindow::on_back_sp_clicked() { ui->inputField->backspace(); }
-void MainWindow::on_clear_clicked() { ui->inputField->setText(""); }
+
+void MainWindow::on_back_sp_clicked() {
+  ui->inputField->backspace();
+  ui->inputField->setStyleSheet("color: black");
+}
+
+void MainWindow::on_clear_clicked() {
+  ui->inputField->setText("");
+  ui->inputField->setStyleSheet("color: black");
+}
 
 void MainWindow::on_result_clicked() {
   setlocale(LC_ALL, "C");
 
-  List* input_stack = {0};
-  List* output_stack = {0};
-  List* numbers = {0};
   QString qstr = ui->inputField->text();
   QByteArray ba = qstr.toLocal8Bit();
   char* str = ba.data();
-  int er = validator(str);
-  if (*str) {
-    if (!er) er = parcer(&input_stack, str);
-    if (!er) er = to_reverse_polish_notation(input_stack, &output_stack);
-    if (!er) er = calculation(output_stack, &numbers);
-    if (!er) {
-      QString toStr = QString::number(numbers->value, 'g', 10);
-      ui->inputField->setText(toStr);
-    } else {
-      ui->inputField->setText("ERROR: Invalid Expression!");
-    }
+  double result;
+  int er = s21_smart_calc(str, &result);
+  if (!er) {
+    QString toStr = QString::number(result, 'g', 10);
+    ui->inputField->setText(toStr);
+  } else if (er == 1) {
+    ui->inputField->setText("ERROR: Invalid Expression!");
+    ui->inputField->setStyleSheet("color: red");
   }
-
-  if (input_stack) destroy_stack(input_stack);
-  if (output_stack) destroy_stack(output_stack);
-  if (numbers) destroy_stack(numbers);
 }
