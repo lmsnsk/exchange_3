@@ -48,10 +48,6 @@ void MainWindow::on_back_sp_clicked() { ui->inputField->backspace(); }
 void MainWindow::on_clear_clicked() { ui->inputField->setText(""); }
 
 void MainWindow::on_result_clicked() {
-  // class numpunct : public numpunct;
-  // numpunct* my = new numpunct();
-  // locale my(locale(""), use_facet<numpunct<char>>(locale("C")));
-  // std::locale cp1251_locale("ru_RU.CP1251");
   setlocale(LC_ALL, "C");
 
   List* input_stack = {0};
@@ -63,7 +59,6 @@ void MainWindow::on_result_clicked() {
   int er = validator(str);
   if (*str) {
     if (!er) er = parcer(&input_stack, str);
-    qDebug() << input_stack->value;
     if (!er) er = to_reverse_polish_notation(input_stack, &output_stack);
     if (!er) er = calculation(output_stack, &numbers);
     if (!er) {

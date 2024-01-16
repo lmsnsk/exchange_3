@@ -53,7 +53,6 @@ void close_bracket_case(List *input, List **support, List **output,
   }
 }
 
-// print_stack_str(*support);
 void operators_case(List *input, List **support, List **output,
                     int *check_negative_func, int *result) {
   List *p = peek_stack(*support);
@@ -78,6 +77,7 @@ void operators_case(List *input, List **support, List **output,
 }
 
 int to_reverse_polish_notation(List *input, List **output) {
+  if (input->priority > 0 && !(input->next)) return ERROR;
   int check_negative_func = 0;
   int result = OK;
   List *support = {0}, *p = {0};

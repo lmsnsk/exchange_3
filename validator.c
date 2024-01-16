@@ -49,7 +49,8 @@ int validator(char *str) {
       if (!i && is_arithmetic(str[i + 1])) result = ERROR;
 
     } else if (str[i] == '(') {
-      if (is_arithmetic(str[i + 1]) && str[i + 2] == ')') result = ERROR;
+      if (str[i + 1] && is_arithmetic(str[i + 1]) && str[i + 2] == ')')
+        result = ERROR;
       bracket++;
 
     } else if (str[i] == ')') {
