@@ -5,6 +5,7 @@
 
 #include <QDebug>
 #include <QMainWindow>
+#include <QPixmap>
 #include <iostream>
 #include <string>
 

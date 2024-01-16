@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   ui->inputField->setAlignment(Qt::AlignRight);
+  ui->centralwidget->setCursor(QCursor(QPixmap("../sources/cursor.png")));
+
   //  ui->btn_0->setStyleSheet("color: red");
 }
 
