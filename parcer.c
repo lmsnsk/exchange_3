@@ -19,13 +19,16 @@ void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
     *result = ERROR;
 }
 
-double parse_number(const char* str, int* i) {
+double parse_number(const char* str, int* i, int* error) {
+  int check_double_remainder = 0;
   double num;
   int len = 0;
   int counter = *i;
-  while ((str[counter] >= '0' && str[counter] <= '9') || str[counter] == '.')
+  while ((str[counter] >= '0' && str[counter] <= '9') || str[counter] == '.') {
+    if (check_double_remainder && str[counter] == '.') *error = 1;
+    if (str[counter] == '.') check_double_remainder = 1;
     len++, counter++;
-
+  }
   char number_array[len + 1];
   for (int j = 0; j < len; j++) {
     number_array[j] = str[*i];
@@ -48,7 +51,7 @@ int parcer(List** list, char* str) {
   int result = OK, i = 0;
   while (str[i]) {
     if (is_number(str[i])) {
-      double num = parse_number(str, &i);
+      double num = parse_number(str, &i, &result);
       push_stack(num, 0, NUMBER, list);
       continue;
     }

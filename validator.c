@@ -57,10 +57,13 @@ int validator(char *str) {
       bracket--;
 
     } else if (str[i] == '.' || str[i] == ',') {
-      if ((str[i - 1] < '0' || str[i - 1] > '9') &&
-          (str[i + 1] < '0' || str[i + 1] > '9')) {
-        result = ERROR;
-      };
+      if (i) {
+        if ((str[i - 1] < '0' || str[i - 1] > '9') &&
+            (str[i + 1] < '0' || str[i + 1] > '9'))
+          result = ERROR;
+      } else {
+        if (str[i + 1] < '0' || str[i + 1] > '9') result = ERROR;
+      }
     }
     if (result) break;
     i++;

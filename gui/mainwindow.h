@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <locale.h>
+
 #include <QDebug>
 #include <QMainWindow>
 #include <iostream>
