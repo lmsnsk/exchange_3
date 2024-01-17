@@ -161,7 +161,8 @@ void MainWindow::on_clear_clicked() {
 void MainWindow::on_memory_clicked() {
   QString memory = ui->result_field->text();
   char* memory_str = memory.toLocal8Bit().data();
-  if (*memory_str && *memory_str != '0') {
+  if (*memory_str && *memory_str != '0' &&
+      strcmp("Invalid Expression!", memory_str)) {
     ui->memory_field->setText(memory);
     ui->memory_field->setEnabled(true);
   }

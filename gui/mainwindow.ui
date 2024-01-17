@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>590</height>
+    <height>623</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1101,7 +1101,10 @@ QPushButton::pressed {
          <string notr="true">QPushButton::hover {
 	background-color: rgb(255, 199, 199);
 }
-</string>
+
+QPushButton::pressed {
+	background-color: rgb(255, 238, 238);
+}</string>
         </property>
         <property name="text">
          <string>C</string>
@@ -1245,6 +1248,10 @@ QPushButton::pressed {
         <property name="styleSheet">
          <string notr="true">QPushButton::hover {
 	background-color: rgb(189, 218, 255);
+}
+
+QPushButton::pressed {
+	background-color:rgb(219, 229, 243);
 }
 </string>
         </property>
@@ -1436,7 +1443,7 @@ QPushButton::pressed {
      <x>0</x>
      <y>0</y>
      <width>386</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
