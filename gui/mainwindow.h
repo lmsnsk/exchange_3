@@ -4,6 +4,7 @@
 #include <locale.h>
 
 #include <QDebug>
+#include <QKeyEvent>
 #include <QMainWindow>
 #include <QPixmap>
 #include <iostream>
@@ -21,6 +22,9 @@ class MainWindow : public QMainWindow {
  public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
+
+ protected:
+  void keyPressEvent(QKeyEvent *event) override;
 
  private slots:
   void on_btn_0_clicked();
@@ -61,5 +65,7 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui;
+  void check_x();
+  void calc();
 };
 #endif  // MAINWINDOW_H

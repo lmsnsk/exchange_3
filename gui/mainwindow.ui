@@ -1097,6 +1097,12 @@ QPushButton::pressed {
         <property name="acceptDrops">
          <bool>true</bool>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton::hover {
+	background-color: rgb(255, 199, 199);
+}
+</string>
+        </property>
         <property name="text">
          <string>C</string>
         </property>
@@ -1220,7 +1226,7 @@ QPushButton::pressed {
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>20</pointsize>
           <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
@@ -1237,7 +1243,10 @@ QPushButton::pressed {
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QPushButton::hover {
+	background-color: rgb(189, 218, 255);
+}
+</string>
         </property>
         <property name="text">
          <string>=</string>

@@ -22,7 +22,11 @@ void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
 double parse_number(const char* str, int* i, int* error, char* x) {
   double num;
   if (str[*i] == 'x') {
-    sscanf(x, "%lf", &num);
+    if (str[*i + 1] == 'x') *error = ERROR;
+    if (*x == 0)
+      num = 0;
+    else
+      sscanf(x, "%lf", &num);
     (*i)++;
   } else {
     int check_double_remainder = 0;
@@ -30,7 +34,7 @@ double parse_number(const char* str, int* i, int* error, char* x) {
     int counter = *i;
     while ((str[counter] >= '0' && str[counter] <= '9') ||
            str[counter] == '.') {
-      if (check_double_remainder && str[counter] == '.') *error = 1;
+      if (check_double_remainder && str[counter] == '.') *error = ERROR;
       if (str[counter] == '.') check_double_remainder = 1;
       len++, counter++;
     }
