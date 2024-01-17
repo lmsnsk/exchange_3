@@ -12,8 +12,10 @@ MainWindow::MainWindow(QWidget* parent)
   ui->input_x->setAlignment(Qt::AlignRight);
   ui->inputField->setAlignment(Qt::AlignRight);
   ui->result_field->setAlignment(Qt::AlignRight);
+  ui->memory_field->setAlignment(Qt::AlignRight);
   ui->result_field->setText("0");
   ui->input_x->setText("1");
+  ui->memory_field->setEnabled(false);
   ui->centralwidget->setCursor(QCursor(QPixmap("../sources/cursor.png")));
 
   //  ui->btn_0->setStyleSheet("color: red");
@@ -59,6 +61,30 @@ void MainWindow::on_clear_clicked() {
   ui->result_field->setStyleSheet("color: black");
 }
 
+void MainWindow::on_memory_clicked() {
+  QString memory = ui->result_field->text();
+  QByteArray memory_ba = memory.toLocal8Bit();
+  char* memory_str = memory_ba.data();
+  if (*memory_str && *memory_str != '0') {
+    ui->memory_field->setText(memory);
+    ui->memory_field->setEnabled(true);
+  }
+}
+
+void MainWindow::on_memory_r_clicked() {
+  QString memory = ui->memory_field->text();
+  QByteArray memory_ba = memory.toLocal8Bit();
+  char* memory_str = memory_ba.data();
+  if (*memory_str) {
+    ui->inputField->insert(memory);
+  }
+}
+
+void MainWindow::on_memory_c_clicked() {
+  ui->memory_field->setText("");
+  ui->memory_field->setEnabled(false);
+}
+
 void MainWindow::on_result_clicked() {
   setlocale(LC_ALL, "C");
 
@@ -73,6 +99,7 @@ void MainWindow::on_result_clicked() {
   if (!er) {
     QString toStr = QString::number(result, 'g', 10);
     ui->result_field->setText(toStr);
+    ui->result_field->setStyleSheet("color: black");
   } else if (er == 1) {
     ui->result_field->setText("Invalid Expression!");
     ui->result_field->setStyleSheet("color: red");

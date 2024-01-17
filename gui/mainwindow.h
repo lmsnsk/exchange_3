@@ -55,6 +55,9 @@ class MainWindow : public QMainWindow {
   void on_back_sp_clicked();
   void on_clear_clicked();
   void on_result_clicked();
+  void on_memory_clicked();
+  void on_memory_r_clicked();
+  void on_memory_c_clicked();
 
  private:
   Ui::MainWindow *ui;
