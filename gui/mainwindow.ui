@@ -24,20 +24,29 @@
   </property>
   <property name="styleSheet">
    <string notr="true">MainWindow {
-	border-radius: 0;
+	border-radius:0;
 }
 
 QPushButton {
-	border-radius: 0;
-	background-color: white;
+	border-radius:0;
+	background-color:white;
 }
 
 QPushButton::hover {
-	background-color: rgb(245, 245, 245);
+	background-color:rgb(245, 245, 245);
 }
 
 QPushButton::pressed {
 	background-color:rgb(219, 229, 243);
+}
+
+QLineEdit {
+	border-radius:0; 
+	border:1px solid grey; 
+}
+
+QLineEdit::disabled {
+	background-color:transparent; 	
 }</string>
   </property>
   <property name="animated">
@@ -87,9 +96,9 @@ QPushButton::pressed {
         </property>
         <item>
          <widget class="QLabel" name="label_3">
-          <property name="maximumSize">
+          <property name="minimumSize">
            <size>
-            <width>16777215</width>
+            <width>0</width>
             <height>15</height>
            </size>
           </property>
@@ -102,8 +111,14 @@ QPushButton::pressed {
          <widget class="QLineEdit" name="input_x">
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>25</height>
+            <width>110</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>30</height>
            </size>
           </property>
           <property name="font">
@@ -115,9 +130,9 @@ QPushButton::pressed {
         </item>
         <item>
          <widget class="QLabel" name="label_2">
-          <property name="maximumSize">
+          <property name="minimumSize">
            <size>
-            <width>16777215</width>
+            <width>0</width>
             <height>15</height>
            </size>
           </property>
@@ -130,8 +145,14 @@ QPushButton::pressed {
          <widget class="QLineEdit" name="memory_field">
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>25</height>
+            <width>110</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>30</height>
            </size>
           </property>
           <property name="font">
@@ -155,8 +176,8 @@ QPushButton::pressed {
          <widget class="QLabel" name="label">
           <property name="minimumSize">
            <size>
-            <width>220</width>
-            <height>0</height>
+            <width>200</width>
+            <height>15</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -173,20 +194,28 @@ QPushButton::pressed {
         <item>
          <widget class="QLineEdit" name="result_field">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>220</width>
+            <width>200</width>
             <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
            </size>
           </property>
           <property name="font">
            <font>
-            <pointsize>16</pointsize>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
           <property name="focusPolicy">

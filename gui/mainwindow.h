@@ -65,6 +65,7 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui;
+  void print_in_field(QString str);
   void check_x();
   void calc();
 };

@@ -11,6 +11,7 @@
 
 typedef enum {
   NUMBER,
+  NUM_X,
   O_BRACKET,
   C_BRACKET,
   PLUS,
@@ -67,7 +68,7 @@ int validator(char* str);
 /// @brief разбивка строки на лексемы
 /// @param str указатель на строку выражения
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
-int parcer(List** list, char* str, char* x);
+int parcer(List** list, char* str);
 
 /// @brief добавление элемента в стек
 /// @param value числовое значение элемента
@@ -99,11 +100,16 @@ int to_reverse_polish_notation(List* input_stack, List** output_stack);
 /// @brief вычисление результата
 /// @param input стек постфиксной записи
 /// @param numbers стек результатов
+/// @param x
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
-int calculation(List* input, List** numbers);
+int calculation(List* input, List** numbers, char* x);
 
 /// @brief функция калькулятора
 /// @param str передаваемая строка выражения
+/// @param result
+/// @param x
 /// @return код ошибки (0 - вычисление прошло успешно, 1 - ошибка, 2 -
 /// передана пустая строка))
 int s21_smart_calc(char* str, double* result, char* x);
+
+void plot();

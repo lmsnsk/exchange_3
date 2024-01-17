@@ -19,33 +19,24 @@ void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
     *result = ERROR;
 }
 
-double parse_number(const char* str, int* i, int* error, char* x) {
+double parse_number(const char* str, int* i, int* error) {
   double num;
-  if (str[*i] == 'x') {
-    if (str[*i + 1] == 'x') *error = ERROR;
-    if (*x == 0)
-      num = 0;
-    else
-      sscanf(x, "%lf", &num);
-    (*i)++;
-  } else {
-    int check_double_remainder = 0;
-    int len = 0;
-    int counter = *i;
-    while ((str[counter] >= '0' && str[counter] <= '9') ||
-           str[counter] == '.') {
-      if (check_double_remainder && str[counter] == '.') *error = ERROR;
-      if (str[counter] == '.') check_double_remainder = 1;
-      len++, counter++;
-    }
-    char number_array[len + 1];
-    for (int j = 0; j < len; j++) {
-      number_array[j] = str[*i];
-      (*i)++;
-    }
-    number_array[len] = '\0';
-    sscanf(number_array, "%lf", &num);
+  int check_double_remainder = 0;
+  int len = 0;
+  int counter = *i;
+  while ((str[counter] >= '0' && str[counter] <= '9') || str[counter] == '.') {
+    if (check_double_remainder && str[counter] == '.') *error = ERROR;
+    if (str[counter] == '.') check_double_remainder = 1;
+    len++, counter++;
   }
+  char number_array[len + 1];
+  for (int j = 0; j < len; j++) {
+    number_array[j] = str[*i];
+    (*i)++;
+  }
+  number_array[len] = '\0';
+  sscanf(number_array, "%lf", &num);
+
   return num;
 }
 
@@ -121,13 +112,19 @@ void parser_switch(List** list, char* str, int* i, int* result) {
   }
 }
 
-int parcer(List** list, char* str, char* x) {
+int parcer(List** list, char* str) {
   int result = OK, i = 0;
   while (str[i]) {
     if (is_number(str[i])) {
-      double num;
-      num = parse_number(str, &i, &result, x);
-      push_stack(num, 0, NUMBER, list);
+      if (str[i] == 'x') {
+        if (str[i + 1] == 'x') result = ERROR;
+        push_stack(0.0, 0, NUM_X, list);
+        i++;
+      } else {
+        double num;
+        num = parse_number(str, &i, &result);
+        push_stack(num, 0, NUMBER, list);
+      }
       if (str[i] == '(' || str[i] == 'x' || str[i] == 'c' || str[i] == 's' ||
           str[i] == 'a' || str[i] == 't' || str[i] == 'l') {
         push_stack(0.0, 2, MUL, list);

@@ -68,11 +68,16 @@ void execution_bin_operator(List** numbers, int type, int* result) {
   }
 }
 
-int calculation(List* input, List** numbers) {
+int calculation(List* input, List** numbers, char* x) {
   int result = OK;
   while (input) {
     if (input->value_type == NUMBER) {
       push_stack(input->value, input->priority, input->value_type, numbers);
+
+    } else if (input->value_type == NUM_X) {
+      double num;
+      sscanf(x, "%lf", &num);
+      push_stack(num, input->priority, input->value_type, numbers);
 
     } else if (is_func(input->value_type) || input->value_type == U_MINUS) {
       execution_un_operator(numbers, input->value_type);

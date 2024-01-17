@@ -30,122 +30,44 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     check_x();
 }
 
-void MainWindow::on_btn_0_clicked() {
-  ui->inputField->insert("0");
+void MainWindow::print_in_field(QString str) {
+  if (ui->input_x->hasFocus())
+    ui->input_x->insert(str);
+  else
+    ui->inputField->insert(str);
   check_x();
 }
-void MainWindow::on_btn_1_clicked() {
-  ui->inputField->insert("1");
-  check_x();
-}
-void MainWindow::on_btn_2_clicked() {
-  ui->inputField->insert("2");
-  check_x();
-}
-void MainWindow::on_btn_3_clicked() {
-  ui->inputField->insert("3");
-  check_x();
-}
-void MainWindow::on_btn_4_clicked() {
-  ui->inputField->insert("4");
-  check_x();
-}
-void MainWindow::on_btn_5_clicked() {
-  ui->inputField->insert("5");
-  check_x();
-}
-void MainWindow::on_btn_6_clicked() {
-  ui->inputField->insert("6");
-  check_x();
-}
-void MainWindow::on_btn_7_clicked() {
-  ui->inputField->insert("7");
-  check_x();
-}
-void MainWindow::on_btn_8_clicked() {
-  ui->inputField->insert("8");
-  check_x();
-}
-void MainWindow::on_btn_9_clicked() {
-  ui->inputField->insert("9");
-  check_x();
-}
-void MainWindow::on_devider_clicked() {
-  ui->inputField->insert(".");
-  check_x();
-}
-void MainWindow::on_btn_x_clicked() {
-  ui->inputField->insert("x");
-  check_x();
-}
-void MainWindow::on_plus_clicked() {
-  ui->inputField->insert("+");
-  check_x();
-}
-void MainWindow::on_minus_clicked() {
-  ui->inputField->insert("-");
-  check_x();
-}
-void MainWindow::on_mul_clicked() {
-  ui->inputField->insert("*");
-  check_x();
-}
-void MainWindow::on_sub_clicked() {
-  ui->inputField->insert("/");
-  check_x();
-}
-void MainWindow::on_exp_clicked() {
-  ui->inputField->insert("^");
-  check_x();
-}
-void MainWindow::on_cos_clicked() {
-  ui->inputField->insert("cos");
-  check_x();
-}
-void MainWindow::on_sin_clicked() {
-  ui->inputField->insert("sin");
-  check_x();
-}
-void MainWindow::on_tan_clicked() {
-  ui->inputField->insert("tan");
-  check_x();
-}
-void MainWindow::on_acos_clicked() {
-  ui->inputField->insert("acos");
-  check_x();
-}
-void MainWindow::on_asin_clicked() {
-  ui->inputField->insert("asin");
-  check_x();
-}
-void MainWindow::on_atan_clicked() {
-  ui->inputField->insert("atan");
-  check_x();
-}
-void MainWindow::on_sqrt_clicked() {
-  ui->inputField->insert("sqrt");
-  check_x();
-}
-void MainWindow::on_ln_clicked() {
-  ui->inputField->insert("ln");
-  check_x();
-}
-void MainWindow::on_log_clicked() {
-  ui->inputField->insert("log");
-  check_x();
-}
-void MainWindow::on_mod_clicked() {
-  ui->inputField->insert("mod");
-  check_x();
-}
-void MainWindow::on_o_brack_clicked() {
-  ui->inputField->insert("(");
-  check_x();
-}
-void MainWindow::on_c_brack_clicked() {
-  ui->inputField->insert(")");
-  check_x();
-}
+
+void MainWindow::on_btn_0_clicked() { print_in_field("0"); }
+void MainWindow::on_btn_1_clicked() { print_in_field("1"); }
+void MainWindow::on_btn_2_clicked() { print_in_field("2"); }
+void MainWindow::on_btn_3_clicked() { print_in_field("3"); }
+void MainWindow::on_btn_4_clicked() { print_in_field("4"); }
+void MainWindow::on_btn_5_clicked() { print_in_field("5"); }
+void MainWindow::on_btn_6_clicked() { print_in_field("6"); }
+void MainWindow::on_btn_7_clicked() { print_in_field("7"); }
+void MainWindow::on_btn_8_clicked() { print_in_field("8"); }
+void MainWindow::on_btn_9_clicked() { print_in_field("9"); }
+void MainWindow::on_devider_clicked() { print_in_field("."); }
+void MainWindow::on_btn_x_clicked() { print_in_field("x"); }
+void MainWindow::on_plus_clicked() { print_in_field("+"); }
+void MainWindow::on_minus_clicked() { print_in_field("-"); }
+void MainWindow::on_mul_clicked() { print_in_field("*"); }
+void MainWindow::on_sub_clicked() { print_in_field("/"); }
+void MainWindow::on_exp_clicked() { print_in_field("^"); }
+void MainWindow::on_cos_clicked() { print_in_field("cos"); }
+void MainWindow::on_sin_clicked() { print_in_field("sin"); }
+void MainWindow::on_tan_clicked() { print_in_field("tan"); }
+void MainWindow::on_acos_clicked() { print_in_field("acos"); }
+void MainWindow::on_asin_clicked() { print_in_field("asin"); }
+void MainWindow::on_atan_clicked() { print_in_field("atan"); }
+void MainWindow::on_sqrt_clicked() { print_in_field("sqrt"); }
+void MainWindow::on_ln_clicked() { print_in_field("ln"); }
+void MainWindow::on_log_clicked() { print_in_field("log"); }
+void MainWindow::on_mod_clicked() { print_in_field("mod"); }
+void MainWindow::on_o_brack_clicked() { print_in_field("("); }
+void MainWindow::on_c_brack_clicked() { print_in_field(")"); }
+
 void MainWindow::on_back_sp_clicked() {
   ui->inputField->backspace();
   check_x();

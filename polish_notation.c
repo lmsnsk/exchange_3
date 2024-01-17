@@ -17,7 +17,7 @@ int is_binar_operator(int val) {
 }
 
 void number_case(List *input, List **output, int *result) {
-    if (input->next && input->next->value_type != C_BRACKET &&
+  if (input->next && input->next->value_type != C_BRACKET &&
       !is_binar_operator(input->next->value_type)) {
     *result = ERROR;
   } else {
@@ -78,12 +78,17 @@ void operators_case(List *input, List **support, List **output,
 
 int to_reverse_polish_notation(List *input, List **output) {
   if (input->priority > 0 && !(input->next)) return ERROR;
+
   int check_negative_func = 0;
   int result = OK;
   List *support = {0}, *p = {0};
   while (input) {
     switch (input->value_type) {
       case NUMBER:
+        number_case(input, output, &result);
+        check_negative_func = 0;
+        break;
+      case NUM_X:
         number_case(input, output, &result);
         check_negative_func = 0;
         break;
@@ -106,5 +111,6 @@ int to_reverse_polish_notation(List *input, List **output) {
     pop_stack(&support);
   }
   if (support) destroy_stack(support);
+
   return result;
 }
