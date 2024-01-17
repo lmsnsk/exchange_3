@@ -59,8 +59,8 @@ void execution_bin_operator(List** numbers, int type, int* result) {
       p->value = pow(value_1, value_2);
       break;
     default:
-      if (round(value_1) == value_1 && round(value_2) == value_2)  ////////
-        p->value = (double)((int)value_1 % (int)value_2);  ////////////////
+      if (round(value_1) == value_1 && round(value_2) == value_2)
+        p->value = (double)((int)value_1 % (int)value_2);
       else {
         *result = 1;
       }

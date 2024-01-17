@@ -67,14 +67,7 @@ int validator(char* str);
 /// @brief разбивка строки на лексемы
 /// @param str указатель на строку выражения
 /// @return код ошибки (0 - выражение корректно, 1 - выражение некорректно)
-int parcer(List** list, char* str);
-
-/// @brief инициализация первого элемента стека
-/// @param value числовое значение элемента
-/// @param priority значение приоритета
-/// @param value_type тип элемента
-/// @return  указать на первый элемент стека
-List* init_stack(double value, int priority, type_t value_type);
+int parcer(List** list, char* str, char* x);
 
 /// @brief добавление элемента в стек
 /// @param value числовое значение элемента
@@ -113,4 +106,4 @@ int calculation(List* input, List** numbers);
 /// @param str передаваемая строка выражения
 /// @return код ошибки (0 - вычисление прошло успешно, 1 - ошибка, 2 -
 /// передана пустая строка))
-int s21_smart_calc(char* str, double* result);
+int s21_smart_calc(char* str, double* result, char* x);

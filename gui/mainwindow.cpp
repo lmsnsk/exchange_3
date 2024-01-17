@@ -9,7 +9,11 @@ extern "C" {
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+  ui->input_x->setAlignment(Qt::AlignRight);
   ui->inputField->setAlignment(Qt::AlignRight);
+  ui->result_field->setAlignment(Qt::AlignRight);
+  ui->result_field->setText("0");
+  ui->input_x->setText("1");
   ui->centralwidget->setCursor(QCursor(QPixmap("../sources/cursor.png")));
 
   //  ui->btn_0->setStyleSheet("color: red");
@@ -46,30 +50,31 @@ void MainWindow::on_log_clicked() { ui->inputField->insert("log"); }
 void MainWindow::on_mod_clicked() { ui->inputField->insert("mod"); }
 void MainWindow::on_o_brack_clicked() { ui->inputField->insert("("); }
 void MainWindow::on_c_brack_clicked() { ui->inputField->insert(")"); }
-
-void MainWindow::on_back_sp_clicked() {
-  ui->inputField->backspace();
-  ui->inputField->setStyleSheet("color: black");
-}
+void MainWindow::on_back_sp_clicked() { ui->inputField->backspace(); }
 
 void MainWindow::on_clear_clicked() {
   ui->inputField->setText("");
-  ui->inputField->setStyleSheet("color: black");
+  ui->result_field->setText("0");
+  ui->input_x->setText("1");
+  ui->result_field->setStyleSheet("color: black");
 }
 
 void MainWindow::on_result_clicked() {
   setlocale(LC_ALL, "C");
 
   QString qstr = ui->inputField->text();
+  QString x_qstr = ui->input_x->text();
   QByteArray ba = qstr.toLocal8Bit();
+  QByteArray x_ba = x_qstr.toLocal8Bit();
   char* str = ba.data();
+  char* x_str = x_ba.data();
   double result;
-  int er = s21_smart_calc(str, &result);
+  int er = s21_smart_calc(str, &result, x_str);
   if (!er) {
     QString toStr = QString::number(result, 'g', 10);
-    ui->inputField->setText(toStr);
+    ui->result_field->setText(toStr);
   } else if (er == 1) {
-    ui->inputField->setText("ERROR: Invalid Expression!");
-    ui->inputField->setStyleSheet("color: red");
+    ui->result_field->setText("Invalid Expression!");
+    ui->result_field->setStyleSheet("color: red");
   }
 }

@@ -2,16 +2,15 @@
 
 int main(void) {
   double result = 0;
-  char str[] = "2+2";
-  // char str[] = "(234.45)+0-0/0*0^2sincostanatanacosasinsqrtlnlog";
+  char str[] = "2+x";
+  char x[] = "5.6";
 
-  int er = s21_smart_calc(str, &result);
+  int er = s21_smart_calc(str, &result, x);
 
+  printf("Infix expression:\n%s\n", str);
   if (er) {
     printf("ERROR: Invalid expression!\n");
-    printf("--------------------------\n");
   } else {
-    printf("Infix expression:\n%s\n", str);
     printf("%f\n", result);
   }
   return 0;

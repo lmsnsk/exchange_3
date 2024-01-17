@@ -2,7 +2,7 @@
 
 int is_number(int c) {
   int result = 0;
-  if ((c >= '0' && c <= '9') || c == '.' || c == ',') result = 1;
+  if ((c >= '0' && c <= '9') || c == '.' || c == ',' || c == 'x') result = 1;
   return result;
 }
 
