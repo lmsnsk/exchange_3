@@ -78,7 +78,7 @@ int calculation(List* input, List** numbers, char* x) {
 
     } else if (input->value_type == NUM_X) {
       double num;
-      sscanf(x, "%lf", &num);
+      if (!sscanf(x, "%lf", &num)) result = ERROR;
       push_stack(num, input->priority, input->value_type, numbers);
 
     } else if (is_func(input->value_type) || input->value_type == U_MINUS) {

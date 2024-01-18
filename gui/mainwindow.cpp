@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget* parent)
   ui->result_field->setText("0");
   ui->memory_field->setEnabled(false);
   ui->input_x->setEnabled(false);
-  ui->centralwidget->setCursor(QCursor(QPixmap("../sources/cursor.png")));
+  ui->result->setCursor(QCursor(QPixmap("../sources/cursor.png")));
 
   //  ui->btn_0->setStyleSheet("color: red");
 }
@@ -81,20 +81,25 @@ void MainWindow::on_clear_clicked() {
 }
 
 void MainWindow::on_memory_clicked() {
-  QString memory = ui->result_field->text();
-  char* memory_str = memory.toLocal8Bit().data();
-  if (*memory_str && *memory_str != '0' &&
-      strcmp("Invalid Expression!", memory_str)) {
-    ui->memory_field->setText(memory);
+  QString memory_qstr = ui->result_field->text();
+  char* memory_str = memory_qstr.toLocal8Bit().data();
+  if (*memory_str && *memory_str != '0' && strcmp("Error!", memory_str)) {
+    int accuracy = 11 - strlen(memory_str);
+    memory = res;
+    QString toStr =
+        QString::number(memory, 'g', accuracy > 0 ? 7 : 7 + accuracy);
+    ui->memory_field->setText(toStr);
     ui->memory_field->setEnabled(true);
   }
 }
 
 void MainWindow::on_memory_r_clicked() {
-  QString memory = ui->memory_field->text();
-  char* memory_str = memory.toLocal8Bit().data();
-  if (*memory_str) {
-    ui->inputField->insert(memory);
+  QString qstr = QString::number(memory, 'g', 10);
+  QString qstr_check = ui->memory_field->text();
+  char* memory_str = qstr.toLocal8Bit().data();
+  char* memory_str_check = qstr_check.toLocal8Bit().data();
+  if (*memory_str_check) {
+    ui->inputField->insert(qstr);
   }
 }
 
@@ -115,14 +120,15 @@ void MainWindow::calc() {
   QByteArray x_ba = x_qstr.toLocal8Bit();
   char* str = ba.data();
   char* x_str = x_ba.data();
-  double result;
-  int er = s21_smart_calc(str, &result, x_str);
+  res = 0;
+  // double result;
+  int er = s21_smart_calc(str, &res, x_str);
   if (!er) {
-    QString toStr = QString::number(result, 'g', 10);
+    QString toStr = QString::number(res, 'g', 8);
     ui->result_field->setText(toStr);
     ui->result_field->setStyleSheet("color: black");
   } else if (er == 1) {
-    ui->result_field->setText("Invalid Expression!");
+    ui->result_field->setText("Error!");
     ui->result_field->setStyleSheet("color: red");
   }
 }
