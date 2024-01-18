@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>623</height>
+    <height>605</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,6 +15,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>386</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Calculator</string>
@@ -68,23 +74,8 @@ QLineEdit::disabled {
      <height>0</height>
     </size>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLineEdit" name="inputField">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-     </widget>
-    </item>
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="spacing">
        <number>6</number>
@@ -227,7 +218,7 @@ QLineEdit::disabled {
       </item>
      </layout>
     </item>
-    <item>
+    <item row="2" column="0">
      <layout class="QGridLayout" name="gridLayoutBtn">
       <property name="leftMargin">
        <number>5</number>
@@ -1461,6 +1452,34 @@ QPushButton::pressed {
       </item>
      </layout>
     </item>
+    <item row="0" column="0">
+     <widget class="QLineEdit" name="inputField">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="3">
+     <widget class="QPushButton" name="pushButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>PLOT</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1472,7 +1491,7 @@ QPushButton::pressed {
      <x>0</x>
      <y>0</y>
      <width>386</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

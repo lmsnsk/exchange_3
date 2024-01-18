@@ -16,14 +16,17 @@ SOURCES += \
     ../parcer.c \
     ../polish_notation.c \
     ../validator.c \
-    ../s21_smart_calc.c
+    ../s21_smart_calc.c \
+    plot.cpp
 
 HEADERS += \
     mainwindow.h \
-    ../s21_smart_calc.h
+    ../s21_smart_calc.h \
+    plot.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    plot.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

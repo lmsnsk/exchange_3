@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget* parent)
   ui->memory_field->setEnabled(false);
   ui->input_x->setEnabled(false);
   ui->result->setCursor(QCursor(QPixmap("../sources/cursor.png")));
+  connect(this, SIGNAL(signal(QString a)), plot, SLOT(slot(QString a)));
 
   //  ui->btn_0->setStyleSheet("color: red");
 }
@@ -96,7 +97,6 @@ void MainWindow::on_memory_clicked() {
 void MainWindow::on_memory_r_clicked() {
   QString qstr = QString::number(memory, 'g', 10);
   QString qstr_check = ui->memory_field->text();
-  char* memory_str = qstr.toLocal8Bit().data();
   char* memory_str_check = qstr_check.toLocal8Bit().data();
   if (*memory_str_check) {
     ui->inputField->insert(qstr);
@@ -139,4 +139,10 @@ void MainWindow::check_x() {
     ui->input_x->setEnabled(true);
   else
     ui->input_x->setEnabled(false);
+}
+
+void MainWindow::on_pushButton_clicked() {
+  plot = new Plot;
+  plot->show();
+  emit signal(ui->inputField->text());
 }

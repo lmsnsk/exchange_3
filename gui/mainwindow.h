@@ -2,11 +2,12 @@
 #define MAINWINDOW_H
 
 #include <locale.h>
+#include <plot.h>
 
-#include <QDebug>
 #include <QKeyEvent>
 #include <QMainWindow>
 #include <QPixmap>
+#include <QtMath>
 #include <iostream>
 #include <string>
 
@@ -64,8 +65,14 @@ class MainWindow : public QMainWindow {
   void on_memory_r_clicked();
   void on_memory_c_clicked();
 
+  void on_pushButton_clicked();
+
+ signals:
+  void signal(QString a);
+
  private:
   Ui::MainWindow *ui;
+  Plot *plot;
   void print_in_field(QString str);
   void check_x();
   void calc();
