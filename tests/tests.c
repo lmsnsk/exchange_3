@@ -3,27 +3,30 @@
 #include "../s21_smart_calc.h"
 
 START_TEST(test_empty_str) {
-  char str[] = "3.i";
+  char str[] = "";
   double result;
   char x[] = "3";
   int er = s21_smart_calc(str, &result, x);
-  ck_assert_int_eq(er, 1);
+  ck_assert_int_eq(er, -1);
 }
 END_TEST
 
 START_TEST(test_incorrect) {
-  char str[][100] = {
-      "ln",     "(",   "acos",      "acot20",    "sos8",   "cis8",  "+",
-      ")",      "mod", "99-",       "cos()",     "mod4",   "3 4",   " --- ",
-      "-*",     "*-",  "3 4 .5 5.", "(3 +)",     " 4+++7", "3+.+3", "((457)",
-      "3 ())4", "b.1", "3.i",       "2.4mod3.4", ""};
+  char str[][15] = {"ln",     "()",        "(2+2)8", ".+",        "art18",
+                    "5+lig7", "(*)",       "acos",   "acot20",    "sos8",
+                    "cis8",   "+",         ")",      "mod",       "99-",
+                    "cos()",  "cos*17",    "mod4",   "4v",        "3 4",
+                    " --- ",  "-*",        "*-",     "3 4 .5 5.", "(3 +)",
+                    " 4+++7", "3+.+3",     "((457)", "3 ())4",    "b.1",
+                    "3.i",    "2.4mod3.4", ""};
   double result;
   int i = 0;
-  do {
-    char x[] = "3";
+  char x[] = "3";
+  while (str[i][0]) {
     int er = s21_smart_calc(str[i], &result, x);
     ck_assert_int_eq(er, 1);
-  } while (!str[i++][0]);
+    i++;
+  };
 }
 END_TEST
 
@@ -78,7 +81,7 @@ START_TEST(test_test_5) {
 END_TEST
 
 START_TEST(test_test_6) {
-  char str[] = "nan * 5";
+  char str[] = "nan * 5+nan-1";
   double result;
   char x[] = "3";
   int er = s21_smart_calc(str, &result, x);
@@ -97,6 +100,16 @@ START_TEST(test_test_7) {
 }
 END_TEST
 
+START_TEST(test_test_8) {
+  char str[] = "2cos30";
+  double result;
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(result, 0.3085028998, 1e-07);
+}
+END_TEST
+
 Suite *suite_create_matrix(void) {
   Suite *s = suite_create("suite_calc");
   TCase *tc = tcase_create("case_calc");
@@ -110,6 +123,7 @@ Suite *suite_create_matrix(void) {
   tcase_add_test(tc, test_test_5);
   tcase_add_test(tc, test_test_6);
   tcase_add_test(tc, test_test_7);
+  tcase_add_test(tc, test_test_8);
 
   suite_add_tcase(s, tc);
   return s;

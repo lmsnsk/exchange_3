@@ -150,6 +150,11 @@ int parcer(List** list, char* str) {
     i++;
   }
   List* p = peek_stack(*list);
-  if (p->priority > 0 && !p->next) result = ERROR;
+  List* tmp = *list;
+  if (!result && ((p->priority > 0 && !p->next) ||
+                  (tmp->value_type == MUL || tmp->value_type == SUB ||
+                   tmp->value_type == MOD || tmp->value_type == EXP))) {
+    result = ERROR;
+  }
   return result;
 }

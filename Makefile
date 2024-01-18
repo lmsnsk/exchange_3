@@ -26,10 +26,10 @@ endif
 all: temp
 
 temp:
-	$(CC) -fsanitize=address -g *.c $(TESTFLAGS)
+	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
 
 compile:
-	$(CC) *.c $(TESTFLAGS)
+	$(CC) *.c zmain/*.c $(TESTFLAGS)
 
 val:
 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out

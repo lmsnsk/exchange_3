@@ -16,15 +16,6 @@ int is_binar_operator(int val) {
   return result;
 }
 
-void number_case(List *input, List **output, int *result) {
-  if (input->next && input->next->value_type != C_BRACKET &&
-      !is_binar_operator(input->next->value_type)) {
-    *result = ERROR;
-  } else {
-    push_stack(input->value, input->priority, input->value_type, output);
-  }
-}
-
 void open_bracket_case(List *input, List **support, int *result) {
   if (input->next &&
       (input->next->value_type == MUL || input->next->value_type == SUB ||
@@ -83,43 +74,25 @@ int to_reverse_polish_notation(List *input, List **output) {
   int result = OK;
   List *support = {0}, *p = {0};
   while (input) {
-    switch (input->value_type) {
-      case NUMBER:
-        number_case(input, output, &result);
-        check_negative_func = 0;
-        break;
-      case NUM_X:
-        number_case(input, output, &result);
-        check_negative_func = 0;
-        break;
-      case NUM_NAN:
-        number_case(input, output, &result);
-        check_negative_func = 0;
-        break;
-      case NUM_INF:
-        number_case(input, output, &result);
-        check_negative_func = 0;
-        break;
-      case O_BRACKET:
-        open_bracket_case(input, &support, &result);
-        check_negative_func = 0;
-        break;
-      case C_BRACKET:
-        close_bracket_case(input, &support, output, &result);
-        break;
-      default:
-        operators_case(input, &support, output, &check_negative_func, &result);
-        break;
+    if (input->value_type == NUMBER || input->value_type == NUM_X ||
+        input->value_type == NUM_NAN || input->value_type == NUM_INF) {
+      push_stack(input->value, input->priority, input->value_type, output);
+      check_negative_func = 0;
+    } else if (input->value_type == O_BRACKET) {
+      open_bracket_case(input, &support, &result);
+      check_negative_func = 0;
+    } else if (input->value_type == C_BRACKET) {
+      close_bracket_case(input, &support, output, &result);
+    } else {
+      operators_case(input, &support, output, &check_negative_func, &result);
     }
     input = input->next;
   }
-
   while ((peek_stack(support)) && !result) {
     p = peek_stack(support);
     push_stack(p->value, p->priority, p->value_type, output);
     pop_stack(&support);
   }
   if (support) destroy_stack(support);
-
   return result;
 }

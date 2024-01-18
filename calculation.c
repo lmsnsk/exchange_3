@@ -62,7 +62,7 @@ void execution_bin_operator(List** numbers, int type, int* result) {
       if (round(value_1) == value_1 && round(value_2) == value_2)
         p->value = (double)((int)value_1 % (int)value_2);
       else {
-        *result = 1;
+        *result = ERROR;
       }
       break;
   }

@@ -1,8 +1,8 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 int main(void) {
   double result = 0;
-  char str[] = "2*tan4";
+  char str[] = "cos*";
   char x[] = "5.6";
 
   int er = s21_smart_calc(str, &result, x);
@@ -16,6 +16,11 @@ int main(void) {
   // plot();
   return 0;
 }
+
+// "ln",     "()",  "acos",      "acot20",    "sos8",   "cis8",  "+",
+//       ")",      "mod", "99-",       "cos()",     "mod4",   "3 4",   " --- ",
+//       "-*",     "*-",  "3 4 .5 5.", "(3 +)",     " 4+++7", "3+.+3", "((457)",
+//       "3 ())4", "b.1", "3.i",       "2.4mod3.4"
 
 void print_stack(List* stack) {
   List* p = stack;
