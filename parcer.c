@@ -3,8 +3,15 @@
 void parse_3_char_oper(List** main_stack, int* result, const char* str, int* i,
                        type_t type, char c1, char c2) {
   if (str[*i + 1] == c1 && str[*i + 2] == c2) {
-    int priority = (c1 == 'o' && c2 == 'd') ? 2 : 3;
-    push_stack(0.0, priority, type, main_stack);
+    if (c1 == 'o' && c2 == 'd') {
+      push_stack(0.0, 2, type, main_stack);
+    } else if (str[*i] == 'n' && c1 == 'a' && c2 == 'n') {
+      push_stack(NAN, 0, type, main_stack);
+    } else if (str[*i] == 'i' && c1 == 'n' && c2 == 'f') {
+      push_stack(INFINITY, 0, type, main_stack);
+    } else {
+      push_stack(0.0, 3, type, main_stack);
+    }
     *i += 2;
   } else
     *result = ERROR;
@@ -41,7 +48,8 @@ double parse_number(const char* str, int* i, int* error) {
 }
 
 void plus_minus(List** list, char* str, int i, int is_minus) {
-  if (i && (str[i - 1] == ')' || is_number(str[i - 1])))
+  if (i && (str[i - 1] == ')' || is_number(str[i - 1]) || str[i - 1] == 'f' ||
+            str[i - 1] == 'n'))
     push_stack(0.0, 1, (is_minus ? MINUS : PLUS), list);
   else {
     push_stack(0.0, 5, (is_minus ? U_MINUS : U_PLUS), list);
@@ -71,8 +79,14 @@ void parser_switch(List** list, char* str, int* i, int* result) {
     case '^':
       push_stack(0.0, 4, EXP, list);
       break;
+    case 'i':
+      parse_3_char_oper(list, result, str, i, NUM_INF, 'n', 'f');
+      break;
     case 'm':
       parse_3_char_oper(list, result, str, i, MOD, 'o', 'd');
+      break;
+    case 'n':
+      parse_3_char_oper(list, result, str, i, NUM_NAN, 'a', 'n');
       break;
     case 'c':
       parse_3_char_oper(list, result, str, i, COS, 'o', 's');

@@ -72,5 +72,6 @@ int validator(char *str) {
     i++;
   }
   if (bracket) result = ERROR;
+
   return result;
 }

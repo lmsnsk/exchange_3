@@ -1,4 +1,3 @@
-#include <locale.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +11,8 @@
 typedef enum {
   NUMBER,
   NUM_X,
+  NUM_NAN,
+  NUM_INF,
   O_BRACKET,
   C_BRACKET,
   PLUS,
@@ -41,7 +42,6 @@ typedef struct List {
 } List;
 
 void print_stack(List* stack);
-
 void print_stack_str(List* stack);
 
 /// @brief определяет, является ли символ числом

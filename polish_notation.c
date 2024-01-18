@@ -92,6 +92,14 @@ int to_reverse_polish_notation(List *input, List **output) {
         number_case(input, output, &result);
         check_negative_func = 0;
         break;
+      case NUM_NAN:
+        number_case(input, output, &result);
+        check_negative_func = 0;
+        break;
+      case NUM_INF:
+        number_case(input, output, &result);
+        check_negative_func = 0;
+        break;
       case O_BRACKET:
         open_bracket_case(input, &support, &result);
         check_negative_func = 0;
@@ -105,6 +113,7 @@ int to_reverse_polish_notation(List *input, List **output) {
     }
     input = input->next;
   }
+
   while ((peek_stack(support)) && !result) {
     p = peek_stack(support);
     push_stack(p->value, p->priority, p->value_type, output);

@@ -70,8 +70,10 @@ void execution_bin_operator(List** numbers, int type, int* result) {
 
 int calculation(List* input, List** numbers, char* x) {
   int result = OK;
+
   while (input) {
-    if (input->value_type == NUMBER) {
+    if (input->value_type == NUMBER || input->value_type == NUM_INF ||
+        input->value_type == NUM_NAN) {
       push_stack(input->value, input->priority, input->value_type, numbers);
 
     } else if (input->value_type == NUM_X) {

@@ -5,7 +5,8 @@
 START_TEST(test_empty_str) {
   char str[] = "3.i";
   double result;
-  int er = s21_smart_calc(str, &result);
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
   ck_assert_int_eq(er, 1);
 }
 END_TEST
@@ -19,7 +20,8 @@ START_TEST(test_incorrect) {
   double result;
   int i = 0;
   do {
-    int er = s21_smart_calc(str[i], &result);
+    char x[] = "3";
+    int er = s21_smart_calc(str[i], &result, x);
     ck_assert_int_eq(er, 1);
   } while (!str[i++][0]);
 }
@@ -28,7 +30,8 @@ END_TEST
 START_TEST(test_test_1) {
   char str[] = "(2+2)-1*4/3";
   double result;
-  int er = s21_smart_calc(str, &result);
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
   ck_assert_int_eq(er, 0);
   ck_assert_double_eq_tol(result, 2.666666667, 1e-07);
 }
@@ -37,7 +40,8 @@ END_TEST
 START_TEST(test_test_2) {
   char str[] = "-1 + cos1 + sin2 + tan4 + atan7 + acos0.5 + asin0.7 + sqrt4";
   double result;
-  int er = s21_smart_calc(str, &result);
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
   ck_assert_int_eq(er, 0);
   ck_assert_double_eq_tol(result, 6.858915335, 1e-07);
 }
@@ -46,7 +50,8 @@ END_TEST
 START_TEST(test_test_3) {
   char str[] = "-log5*ln7+2^4";
   double result;
-  int er = s21_smart_calc(str, &result);
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
   ck_assert_int_eq(er, 0);
   ck_assert_double_eq_tol(result, 14.63986717, 1e-07);
 }
@@ -55,9 +60,40 @@ END_TEST
 START_TEST(test_test_4) {
   char str[] = "10mod5";
   double result;
-  int er = s21_smart_calc(str, &result);
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
   ck_assert_int_eq(er, 0);
   ck_assert_double_eq_tol(result, 0, 1e-07);
+}
+END_TEST
+
+START_TEST(test_test_5) {
+  char str[] = "inf * 5";
+  double result;
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_infinite(result);
+}
+END_TEST
+
+START_TEST(test_test_6) {
+  char str[] = "nan * 5";
+  double result;
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_nan(result);
+}
+END_TEST
+
+START_TEST(test_test_7) {
+  char str[] = "x * 5";
+  double result;
+  char x[] = "3";
+  int er = s21_smart_calc(str, &result, x);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(result, 15.0, 1e-07);
 }
 END_TEST
 
@@ -71,6 +107,9 @@ Suite *suite_create_matrix(void) {
   tcase_add_test(tc, test_test_2);
   tcase_add_test(tc, test_test_3);
   tcase_add_test(tc, test_test_4);
+  tcase_add_test(tc, test_test_5);
+  tcase_add_test(tc, test_test_6);
+  tcase_add_test(tc, test_test_7);
 
   suite_add_tcase(s, tc);
   return s;
