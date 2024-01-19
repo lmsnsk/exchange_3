@@ -1,6 +1,10 @@
 #ifndef PLOT_H
 #define PLOT_H
 
+#include <locale.h>
+#include <stdio.h>
+
+#include <QDebug>
 #include <QPainter>
 #include <QWidget>
 
@@ -11,16 +15,20 @@ class Plot;
 class Plot : public QWidget {
   Q_OBJECT
 
+ protected:
+  void paintEvent(QPaintEvent *event);
+
  public:
   explicit Plot(QWidget *parent = nullptr);
   ~Plot();
 
  public slots:
-  void slot(QString a);
+  void slot_plot(QString str);
 
  private:
+  QString check;
+  char *input_plot_str;
   Ui::Plot *ui;
-  void paintEvent(QPaintEvent *event);
 };
 
 #endif  // PLOT_H

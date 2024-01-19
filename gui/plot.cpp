@@ -2,34 +2,53 @@
 
 #include "ui_plot.h"
 
-Plot::Plot(QWidget* parent) : QWidget(parent), ui(new Ui::Plot) {
+extern "C" {
+#include "../s21_smart_calc.h"
+}
+
+Plot::Plot(QWidget *parent) : QWidget(parent), ui(new Ui::Plot) {
   ui->setupUi(this);
-  ui->label->setText("esfewfewfef");
 }
 
 Plot::~Plot() { delete ui; }
 
-void Plot::slot(QString a) { ui->label->setText(a); }
+void Plot::slot_plot(QString str) {
+  Plot::check = str;
+  update();
+}
 
-void Plot::paintEvent(QPaintEvent* event) {
-  double f, dx = 0;
-  double h = 0.001, k = 0.05, a = 200;  // коэффициенты настройки графика
-  QPainter p(this);  // объект для рисования
-  int x = this->width() / 2, y = this->height() / 2;  // центр окон
-  p.setPen(QPen(Qt::blue, Qt::SolidLine));  // цвет и тип пера
-  p.drawLine(0, y, 2 * x, y);
-  p.drawLine(x, 0, x, 2 * y);     // координатные оси
-  QRect rect(x - 20, y, 20, 20);  // прямоугольник для текста
+void Plot::paintEvent(QPaintEvent *event) {
+  Q_UNUSED(event);
+  setlocale(LC_ALL, "C");
+
+  QByteArray ba = check.toLocal8Bit();
+  input_plot_str = ba.data();
+
+  QPainter p(this);
+  int step = 10000;
+  double ran_x_l = -3, ran_x_r = 3;
+  double div = this->width() / (ran_x_r - ran_x_l);
+  int centr_x = this->width() / 2, center_y = this->height() / 2;
+
+  // axies
+  p.setPen(QPen(Qt::blue, Qt::SolidLine));
+  p.drawLine(0, center_y, 2 * centr_x, center_y);
+  p.drawLine(centr_x, 0, centr_x, 2 * center_y);
+  // text
+  QRect rect(centr_x - 20, center_y, 20, 20);
   p.setPen(QPen(Qt::red, Qt::SolidLine));
-  p.setFont(QFont("Arial", -1, -1, false));  // зададим свойства шрифта
+  p.setFont(QFont("Arial", -1, -1, false));
   p.drawText(rect, Qt::AlignCenter, "0");
-  p.setPen(QPen(QColor(0, 100, 50, 255), Qt::SolidLine));
-  /*построение графика*/
-  // QString qstr = ui->result_field->text();
-  // char* str = memory_qstr.toLocal8Bit().data();
-  // for (int i = 0; i < 100; i++) {
-  //   s21_smart_calc(ui->result_field->text());
-  //   p.drawPoint(i, f);
-  //   dx = dx + h;
-  // }
+  // graph
+  p.setPen(QPen(Qt::black, Qt::SolidLine));
+  p.setBrush(QBrush(Qt::black, Qt::SolidPattern));
+  double i = ran_x_l;
+  while ((ran_x_r - ran_x_l > 0) && i < ran_x_r) {
+    double y;
+    char x[64];
+    sprintf(x, "%e", i);
+    s21_smart_calc(input_plot_str, &y, x);
+    p.drawRect(i * div + centr_x, -y * div + center_y, 2, 2);
+    i += (ran_x_r - ran_x_l) / step;
+  }
 }

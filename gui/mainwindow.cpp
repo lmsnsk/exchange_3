@@ -2,13 +2,10 @@
 
 #include "ui_mainwindow.h"
 
-extern "C" {
-#include "../s21_smart_calc.h"
-}
-
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+  this->move(200, 100);
   ui->input_x->setAlignment(Qt::AlignRight);
   ui->inputField->setAlignment(Qt::AlignRight);
   ui->result_field->setAlignment(Qt::AlignRight);
@@ -17,9 +14,6 @@ MainWindow::MainWindow(QWidget* parent)
   ui->memory_field->setEnabled(false);
   ui->input_x->setEnabled(false);
   ui->result->setCursor(QCursor(QPixmap("../sources/cursor.png")));
-  connect(this, SIGNAL(signal(QString a)), plot, SLOT(slot(QString a)));
-
-  //  ui->btn_0->setStyleSheet("color: red");
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -142,7 +136,8 @@ void MainWindow::check_x() {
 }
 
 void MainWindow::on_pushButton_clicked() {
-  plot = new Plot;
-  plot->show();
-  emit signal(ui->inputField->text());
+  plot.show();
+  plot.move(600, 125);
+  connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);
+  emit signal_plot(ui->inputField->text());
 }

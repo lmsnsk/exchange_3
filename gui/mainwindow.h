@@ -11,6 +11,10 @@
 #include <iostream>
 #include <string>
 
+extern "C" {
+#include "../s21_smart_calc.h"
+}
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -19,14 +23,13 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
-  double res, memory;
 
  public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
  protected:
-  void keyPressEvent(QKeyEvent *event) override;
+  void keyPressEvent(QKeyEvent *event);
 
  private slots:
   void on_btn_0_clicked();
@@ -68,11 +71,12 @@ class MainWindow : public QMainWindow {
   void on_pushButton_clicked();
 
  signals:
-  void signal(QString a);
+  void signal_plot(QString str);
 
  private:
+  double res, memory;
   Ui::MainWindow *ui;
-  Plot *plot;
+  Plot plot;
   void print_in_field(QString str);
   void check_x();
   void calc();
