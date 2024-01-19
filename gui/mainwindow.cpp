@@ -137,7 +137,7 @@ void MainWindow::check_x() {
 
 void MainWindow::on_pushButton_clicked() {
   plot.show();
-  plot.move(600, 125);
+  plot.move(600, 100);
   connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);
   emit signal_plot(ui->inputField->text());
 }
