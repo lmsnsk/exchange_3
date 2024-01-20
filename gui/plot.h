@@ -29,6 +29,8 @@ class Plot : public QWidget {
   QString check;
   char *input_plot_str;
   Ui::Plot *ui;
+  // void grid_drawing(QPainter p, double ran_x_r, double ran_x_l, double
+  // scale_x, double center_x, double center_y);
 };
 
 #endif  // PLOT_H
