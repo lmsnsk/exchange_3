@@ -111,5 +111,3 @@ int calculation(List* input, List** numbers, char* x);
 /// @return код ошибки (0 - вычисление прошло успешно, 1 - ошибка, 2 -
 /// передана пустая строка))
 int s21_smart_calc(char* str, double* result, char* x);
-
-void plot();

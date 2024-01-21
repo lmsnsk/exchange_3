@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget* parent)
   ui->memory_field->setEnabled(false);
   ui->input_x->setEnabled(false);
   ui->result->setCursor(QCursor(QPixmap("../sources/cursor.png")));
+  ui->input_x->setValidator(
+      new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")));
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -135,7 +137,7 @@ void MainWindow::check_x() {
     ui->input_x->setEnabled(false);
 }
 
-void MainWindow::on_pushButton_clicked() {
+void MainWindow::on_plotButton_clicked() {
   plot.show();
   plot.move(600, 100);
   connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);

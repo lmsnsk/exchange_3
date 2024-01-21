@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <plot.h>
 
+#include <QValidator>
 #include <QKeyEvent>
 #include <QMainWindow>
 #include <QPixmap>
@@ -68,7 +69,7 @@ class MainWindow : public QMainWindow {
   void on_memory_r_clicked();
   void on_memory_c_clicked();
 
-  void on_pushButton_clicked();
+  void on_plotButton_clicked();
 
  signals:
   void signal_plot(QString str);
