@@ -41,7 +41,7 @@ install:
 	make clean
 
 uninstall:
-	rm -rf ~/Desktop/$(TARGET).app
+	rm -rf ~/Desktop/$(TARGET)
 
 dist:
 	mkdir dist
