@@ -47,8 +47,11 @@ dist:
 	mkdir dist
 	mkdir dist/src
 	cp -r gui/ tests/ Makefile *.c *.h dist/src/
-	cd ./dist && tar cvzf $(TARGET).tgz *
+	cd ./dist && tar cvzf $(TARGET)_v1.0.tgz *
 	rm -rf dist/src/
+
+dvi:
+	$(OPEN_CMD) s21_smart_calc.html
 
 test: 
 	$(CC) $(FILETEST).c *.c -o $(FILETESTO) $(TESTFLAGS)
