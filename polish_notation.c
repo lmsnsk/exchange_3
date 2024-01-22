@@ -72,7 +72,7 @@ int to_reverse_polish_notation(List *input, List **output) {
 
   int check_negative_func = 0;
   int result = OK;
-  List *support = {0}, *p = {0};
+  List *support = {0};
   while (input) {
     if (input->value_type == NUMBER || input->value_type == NUM_X ||
         input->value_type == NUM_NAN || input->value_type == NUM_INF) {
@@ -89,7 +89,7 @@ int to_reverse_polish_notation(List *input, List **output) {
     input = input->next;
   }
   while ((peek_stack(support)) && !result) {
-    p = peek_stack(support);
+    List *p = peek_stack(support);
     push_stack(p->value, p->priority, p->value_type, output);
     pop_stack(&support);
   }

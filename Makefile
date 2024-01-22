@@ -1,12 +1,11 @@
-# FLAGS=-Wall -Werror -Wextra -std=c11
-FLAGS=-Wall -Wextra -std=c11
+TARGET=SmartCalc
+FLAGS=-Wall -Werror -Wextra -std=c11
 CC=gcc $(FLAGS)
 FILE=s21_calc
 FILETEST=tests/*
 FILEREPORT=s21_test_report
 FILETESTO=s21_test
 DIRREPORT=report
-LIB=$(FILE).a
 COVFLAG=-fprofile-arcs -ftest-coverage
 
 OS = $(shell uname)
@@ -20,23 +19,36 @@ else
 endif
 
 
-# all: clean $(FILE).a gcov_report
+all: clean gcov_report install
 
 #######################################
-all: temp
+# all: temp
 
-temp:
-	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
+# temp:
+# 	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
 
-compile:
-	$(CC) *.c zmain/*.c $(TESTFLAGS)
+# compile:
+# 	$(CC) *.c zmain/*.c $(TESTFLAGS)
 
-val:
-	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
+# val:
+# 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
 #######################################
 
-o_files:
-	$(CC) -c *.c
+install:
+	mkdir ./build
+	mkdir ~/Desktop/$(TARGET)/
+	cd ./build && qmake ../gui/ && make && cp gui ~/Desktop/SmartCalc/$(TARGET).app
+	make clean
+
+uninstall:
+	rm -rf ~/Desktop/$(TARGET).app
+
+dist:
+	mkdir dist
+	mkdir dist/src
+	cp -r gui/ tests/ Makefile *.c *.h dist/src/
+	cd ./dist && tar cvzf $(TARGET).tgz *
+	rm -rf dist/src/
 
 test: 
 	$(CC) $(FILETEST).c *.c -o $(FILETESTO) $(TESTFLAGS)
@@ -52,12 +64,14 @@ gcov_report:
 	./$(FILEREPORT)
 	lcov -t "$(FILE)" -o test.info -c -d .  
 	genhtml -o $(DIRREPORT) test.info
+	rm -rf *.o *.a *.gcno *.gcda *.info *.log $(FILETESTO) $(FILEREPORT)
 	$(OPEN_CMD) $(DIRREPORT)/index.html
 
 rep: gcov_report
 
 clean:
-	rm -rf *.o *.a *.gcno *.gcda *.info *.log $(DIRREPORT) $(FILETESTO) $(FILEREPORT)
+	rm -rf *.o *.a *.gcno *.gcda *.info *.log $(DIRREPORT) \
+	$(FILETESTO) $(FILEREPORT) ./build ./dist
 
 #style
 cpp:
