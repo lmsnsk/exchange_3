@@ -9,9 +9,11 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    credit.cpp \
     main.cpp \
     mainwindow.cpp \
     ../calculation.c \
+    ../credit_calc.c \
     ../list.c \
     ../parcer.c \
     ../polish_notation.c \
@@ -20,11 +22,13 @@ SOURCES += \
     plot.cpp
 
 HEADERS += \
+    credit.h \
     mainwindow.h \
     ../s21_smart_calc.h \
     plot.h
 
 FORMS += \
+    credit.ui \
     mainwindow.ui \
     plot.ui
 

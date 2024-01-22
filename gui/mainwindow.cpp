@@ -138,8 +138,15 @@ void MainWindow::check_x() {
 }
 
 void MainWindow::on_plotButton_clicked() {
+  credit.hide();
   plot.show();
   plot.move(600, 100);
   connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);
   emit signal_plot(ui->inputField->text());
+}
+
+void MainWindow::on_creditButton_clicked() {
+  plot.hide();
+  credit.show();
+  credit.move(600, 100);
 }

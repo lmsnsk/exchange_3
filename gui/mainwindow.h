@@ -1,13 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <credit.h>
 #include <locale.h>
 #include <plot.h>
 
-#include <QValidator>
 #include <QKeyEvent>
 #include <QMainWindow>
 #include <QPixmap>
+#include <QValidator>
 #include <QtMath>
 #include <iostream>
 #include <string>
@@ -68,16 +69,17 @@ class MainWindow : public QMainWindow {
   void on_memory_clicked();
   void on_memory_r_clicked();
   void on_memory_c_clicked();
-
   void on_plotButton_clicked();
+  void on_creditButton_clicked();
 
- signals:
+signals:
   void signal_plot(QString str);
 
  private:
   double res, memory;
   Ui::MainWindow *ui;
   Plot plot;
+  Credit credit;
   void print_in_field(QString str);
   void check_x();
   void calc();

@@ -1,18 +1,30 @@
 #include "../s21_smart_calc.h"
 
 int main(void) {
-  double result = 0;
-  char str[] = "cos*";
-  char x[] = "5.6";
+  // double result = 0;
+  // char str[] = "cos*";
+  // char x[] = "5.6";
 
-  int er = s21_smart_calc(str, &result, x);
+  // int er = s21_smart_calc(str, &result, x);
 
-  printf("Infix expression:\n%s\n", str);
-  if (er) {
-    printf("ERROR: Invalid expression!\n");
-  } else {
-    printf("%f\n", result);
-  }
+  // printf("Infix expression:\n%s\n", str);
+  // if (er) {
+  //   printf("ERROR: Invalid expression!\n");
+  // } else {
+  //   printf("%f\n", result);
+  // }
+  double amount = 2600000;
+  double rate_percent = 10;
+  int time = 1;
+  int type = 0;
+  double pay, total_pay, overpay, first_pay;
+
+  credit(amount, rate_percent, time, type, &pay, &total_pay, &overpay,
+         &first_pay);
+  if (!type) first_pay = pay;
+  printf("%.1f...%.1f\n", first_pay, pay);
+  printf("%.1f\n", total_pay);
+  printf("%.1f\n", overpay);
   // plot();
   return 0;
 }

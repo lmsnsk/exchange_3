@@ -93,8 +93,8 @@ void Plot::axies_and_graph(QPainter *p, double center_x, double center_y,
     char x[64];
     sprintf(x, "%e", *i);
     s21_smart_calc(input_plot_str, &y, x);
-    p->drawRect(*i * scale_x - ran_x_l * scale_x, -y * scale_x + center_y, 2,
-                2);
+    p->drawRect(*i * scale_x - ran_x_l * scale_x, -y * scale_x + center_y, 1,
+                1);
     *i += (ran_x_r - ran_x_l) / step;
   }
   p->setPen(QPen(QColor(200, 200, 200, 255), Qt::SolidLine));
@@ -110,7 +110,7 @@ void Plot::paintEvent(QPaintEvent *event) {
   if (ran_x_r > ran_x_l) {
     QPainter p(this);
     p.setPen(QPen(Qt::gray, Qt::SolidLine));
-    int step = 10000;
+    int step = 100000;
     ui->IncorrectRange->hide();
     double scale_x = this->width() / (ran_x_r - ran_x_l);
     int center_x = this->width() / 2, center_y = this->height() / 2;

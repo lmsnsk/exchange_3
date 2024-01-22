@@ -111,3 +111,16 @@ int calculation(List* input, List** numbers, char* x);
 /// @return код ошибки (0 - вычисление прошло успешно, 1 - ошибка, 2 -
 /// передана пустая строка))
 int s21_smart_calc(char* str, double* result, char* x);
+
+/// @brief функция кредитного калькулятора
+/// @param amount сумма займа
+/// @param rate_percent годовая ставка
+/// @param time срок кредита
+/// @param type тип кредитования (1 - аннуитетный, 2 - дифференцированный)
+/// @param pay  последний платеж
+/// @param total_pay общая сумма выплаты
+/// @param overpay переплата
+/// @param first_pay первый платеж (для дифференцированного кредита)
+void credit_calc(double amount, double rate_percent, int time, int type,
+                 double* pay, double* total_pay, double* overpay,
+                 double* first_pay);
