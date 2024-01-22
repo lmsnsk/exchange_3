@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   this->move(200, 100);
+  // setWindowIcon(QIcon(":img/img/icon_calc.ico"));
   ui->input_x->setAlignment(Qt::AlignRight);
   ui->inputField->setAlignment(Qt::AlignRight);
   ui->result_field->setAlignment(Qt::AlignRight);

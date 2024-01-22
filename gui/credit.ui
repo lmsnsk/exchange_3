@@ -190,7 +190,7 @@ QLineEdit::disabled {
 }</string>
      </property>
      <property name="text">
-      <string>Caculate</string>
+      <string>Calculate</string>
      </property>
     </widget>
    </item>
