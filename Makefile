@@ -39,7 +39,7 @@ install:
 	mkdir ~/Desktop/$(TARGET)/
 	cd ./build && qmake ../gui/ && make && cp gui ~/Desktop/SmartCalc/$(TARGET).app
 	make clean
-
+	
 uninstall:
 	rm -rf ~/Desktop/$(TARGET)
 
@@ -83,7 +83,6 @@ cpp:
 clang:
 	cp ../materials/linters/.clang-format .clang-format
 	clang-format -n *.c *.h
-	clang-format -i *.c *.h 
 	rm -rf .clang-format
 
 check: cpp clang

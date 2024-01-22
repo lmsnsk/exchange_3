@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent)
   ui->result_field->setText("0");
   ui->memory_field->setEnabled(false);
   ui->input_x->setEnabled(false);
-  ui->result->setCursor(QCursor(QPixmap("img/cursor.png")));
+  ui->result->setCursor(QCursor(QPixmap(":img/img/cursor.png")));
   ui->input_x->setValidator(
       new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")));
 }
