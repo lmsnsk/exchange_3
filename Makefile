@@ -21,7 +21,7 @@ endif
 
 all: clean gcov_report install
 
-#######################################
+######################################
 # all: temp
 
 # temp:
@@ -32,7 +32,7 @@ all: clean gcov_report install
 
 # val:
 # 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
-#######################################
+######################################
 
 install:
 	mkdir ./build

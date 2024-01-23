@@ -3,6 +3,7 @@
 
 #include <locale.h>
 
+#include <QIcon>
 #include <QValidator>
 #include <QWidget>
 

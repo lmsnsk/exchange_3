@@ -8,6 +8,7 @@ extern "C" {
 
 Plot::Plot(QWidget *parent) : QWidget(parent), ui(new Ui::Plot) {
   ui->setupUi(this);
+  setWindowIcon(QIcon(":img/img/calc.ico"));
   ui->rangeFrom->setText("-10");
   ui->rangeTo->setText("10");
   ui->labelCell->setText("1");

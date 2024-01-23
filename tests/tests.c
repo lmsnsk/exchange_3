@@ -110,7 +110,37 @@ START_TEST(test_test_8) {
 }
 END_TEST
 
-Suite *suite_create_matrix(void) {
+START_TEST(test_test_credit_1) {
+  int type = 1;
+  double amount = 2500000;
+  double time = 120;
+  double rate_percent = 10;
+  double pay, overpay, total_pay, first_pay;
+  credit_calc(amount, rate_percent, time, type, &pay, &total_pay, &overpay,
+              &first_pay);
+  ck_assert_double_eq_tol(pay, 33037.68, 1);
+  ck_assert_double_eq_tol(first_pay, 33037.68, 1);
+  ck_assert_double_eq_tol(total_pay, 3964521.60, 1);
+  ck_assert_double_eq_tol(overpay, 1464521.60, 1);
+}
+END_TEST
+
+START_TEST(test_test_credit_2) {
+  int type = 2;
+  double amount = 2500000;
+  double time = 120;
+  double rate_percent = 10;
+  double pay, overpay, total_pay, first_pay;
+  credit_calc(amount, rate_percent, time, type, &pay, &total_pay, &overpay,
+              &first_pay);
+  ck_assert_double_eq_tol(pay, 21006.94, 1e-2);
+  ck_assert_double_eq_tol(first_pay, 41666.67, 1e-2);
+  ck_assert_double_eq_tol(total_pay, 3760416.67, 1e-2);
+  ck_assert_double_eq_tol(overpay, 1260416.67, 1e-2);
+}
+END_TEST
+
+Suite *suite_calc(void) {
   Suite *s = suite_create("suite_calc");
   TCase *tc = tcase_create("case_calc");
 
@@ -124,6 +154,8 @@ Suite *suite_create_matrix(void) {
   tcase_add_test(tc, test_test_6);
   tcase_add_test(tc, test_test_7);
   tcase_add_test(tc, test_test_8);
+  tcase_add_test(tc, test_test_credit_1);
+  tcase_add_test(tc, test_test_credit_2);
 
   suite_add_tcase(s, tc);
   return s;
@@ -140,7 +172,7 @@ void run_testcase(Suite *testcase) {
 }
 
 int main(void) {
-  run_testcase(suite_create_matrix());
+  run_testcase(suite_calc());
 
   return 0;
 }

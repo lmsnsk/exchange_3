@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <stdio.h>
 
+#include <QIcon>
 #include <QPainter>
 #include <QValidator>
 #include <QWidget>

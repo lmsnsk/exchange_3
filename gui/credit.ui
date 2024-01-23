@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>260</width>
+    <width>297</width>
     <height>300</height>
    </rect>
   </property>
@@ -60,8 +60,25 @@ QLineEdit::disabled {
    </item>
    <item row="8" column="1">
     <widget class="QLineEdit" name="totalPayRes">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+	border:none;
+	background-color: transparent;
+}</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -78,7 +95,7 @@ QLineEdit::disabled {
    <item row="6" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Periodic pay</string>
+      <string>Month payment:</string>
      </property>
     </widget>
    </item>
@@ -98,8 +115,25 @@ QLineEdit::disabled {
    </item>
    <item row="6" column="1">
     <widget class="QLineEdit" name="payRes">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+	border:none;
+	background-color: transparent;
+}</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -124,8 +158,25 @@ QLineEdit::disabled {
    </item>
    <item row="7" column="1">
     <widget class="QLineEdit" name="overpayRes">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+	border:none;
+	background-color: transparent;
+}</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -149,14 +200,14 @@ QLineEdit::disabled {
    <item row="8" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>Total pay</string>
+      <string>Total payment:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Overpayment</string>
+      <string>Overpayment:</string>
      </property>
     </widget>
    </item>

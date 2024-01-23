@@ -8,12 +8,16 @@ extern "C" {
 
 Credit::Credit(QWidget *parent) : QWidget(parent), ui(new Ui::Credit) {
   ui->setupUi(this);
+  setWindowIcon(QIcon(":img/img/calc.ico"));
   ui->loanAmountInput->setFocus();
   ui->loanAmountInput->setValidator(
       new QRegExpValidator(QRegExp("[0-9]*\\.?[0-9]*")));
   ui->timeInput->setValidator(new QIntValidator(1, 360, this));
   ui->rateInput->setValidator(
       new QRegExpValidator(QRegExp("[0-9]{0,3}\\.?[0-9]?")));
+  ui->payRes->setText("0");
+  ui->overpayRes->setText("0");
+  ui->totalPayRes->setText("0");
 }
 
 Credit::~Credit() { delete ui; }
