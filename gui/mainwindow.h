@@ -76,6 +76,7 @@ signals:
   void signal_plot(QString str);
 
  private:
+  int pos_x, pos_y;
   double res, memory;
   Ui::MainWindow *ui;
   Plot plot;

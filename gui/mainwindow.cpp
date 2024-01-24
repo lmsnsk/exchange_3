@@ -5,7 +5,7 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  this->move(200, 100);
+  this->move(300, 150);
   setWindowIcon(QIcon(":img/img/calc.ico"));
   ui->input_x->setAlignment(Qt::AlignRight);
   ui->inputField->setAlignment(Qt::AlignRight);
@@ -138,15 +138,19 @@ void MainWindow::check_x() {
 }
 
 void MainWindow::on_plotButton_clicked() {
+  pos_x = this->geometry().x();
+  pos_y = this->geometry().y();
   credit.hide();
-  plot.move(588, 100);
+  plot.move(pos_x + 388, pos_y - 24);
   connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);
   emit signal_plot(ui->inputField->text());
   plot.show();
 }
 
 void MainWindow::on_creditButton_clicked() {
+  pos_x = this->geometry().x();
+  pos_y = this->geometry().y();
   plot.hide();
-  credit.move(588, 100);
+  credit.move(pos_x + 388, pos_y - 24);
   credit.show();
 }

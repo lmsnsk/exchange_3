@@ -44,7 +44,7 @@ double grid_calculation(double *interval_grid_step, double ran_x_r,
   }
   *interval_grid_step *= pow(10, counter);
   double left_grid = ran_x_l;
-  while (abs(left_grid) < 1 || abs(left_grid) >= 10) {
+  while (left_grid && (abs(left_grid) < 1 || abs(left_grid) >= 10)) {
     if (abs(left_grid) < 1)
       left_grid *= 10, counter_left_grid--;
     else
@@ -111,7 +111,7 @@ void Plot::paintEvent(QPaintEvent *event) {
   if (ran_x_r > ran_x_l) {
     QPainter p(this);
     p.setPen(QPen(Qt::gray, Qt::SolidLine));
-    int step = 100000;
+    int step = 50000;
     ui->IncorrectRange->hide();
     double scale_x = this->width() / (ran_x_r - ran_x_l);
     int center_x = this->width() / 2, center_y = this->height() / 2;
