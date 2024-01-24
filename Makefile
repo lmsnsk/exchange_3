@@ -38,7 +38,6 @@ install:
 	mkdir ./build
 	mkdir ~/Desktop/$(TARGET)/
 	cd ./build && qmake ../gui/ && make && cp gui ~/Desktop/SmartCalc/$(TARGET).app
-	make clean
 	
 uninstall:
 	rm -rf ~/Desktop/$(TARGET)
