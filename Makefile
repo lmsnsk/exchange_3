@@ -37,10 +37,11 @@ val:
 install:
 	mkdir ./build
 	mkdir ~/Desktop/$(TARGET)/
-	cd ./build && qmake ../gui/ && make && cp gui ~/Desktop/SmartCalc/$(TARGET).app
+	cd ./build && qmake ../gui/ && make && cp gui ~/Desktop/SmartCalc/$(TARGET).app \
+	&& mv gui $(TARGET).app
 	
 uninstall:
-	rm -rf ~/Desktop/$(TARGET)
+	rm -rf ~/Desktop/$(TARGET) ./build
 
 dist:
 	mkdir dist
@@ -73,7 +74,7 @@ rep: gcov_report
 
 clean:
 	rm -rf *.o *.a *.gcno *.gcda *.info *.log $(DIRREPORT) \
-	$(FILETESTO) $(FILEREPORT) ./build ./dist
+	$(FILETESTO) $(FILEREPORT) ./build* ./dist
 
 #style
 cpp:

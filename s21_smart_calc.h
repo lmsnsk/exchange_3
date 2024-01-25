@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define OK 0
-#define ERROR 1
 #define EMPTY -1
 #define MAX_SIZE 256
 

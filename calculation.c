@@ -62,14 +62,14 @@ void execution_bin_operator(List** numbers, int type, int* result) {
       if (round(value_1) == value_1 && round(value_2) == value_2)
         p->value = (double)((int)value_1 % (int)value_2);
       else {
-        *result = ERROR;
+        *result = EXIT_FAILURE;
       }
       break;
   }
 }
 
 int calculation(List* input, List** numbers, char* x) {
-  int result = OK;
+  int result = EXIT_SUCCESS;
 
   while (input) {
     if (input->value_type == NUMBER || input->value_type == NUM_INF ||
@@ -78,7 +78,7 @@ int calculation(List* input, List** numbers, char* x) {
 
     } else if (input->value_type == NUM_X) {
       double num;
-      if (!sscanf(x, "%lf", &num)) result = ERROR;
+      if (!sscanf(x, "%lf", &num)) result = EXIT_FAILURE;
       push_stack(num, input->priority, input->value_type, numbers);
 
     } else if (is_func(input->value_type) || input->value_type == U_MINUS) {
@@ -91,7 +91,7 @@ int calculation(List* input, List** numbers, char* x) {
     input = input->next;
   }
   List* p = *numbers;
-  if (p->next) result = ERROR;
+  if (p->next) result = EXIT_FAILURE;
 
   return result;
 }

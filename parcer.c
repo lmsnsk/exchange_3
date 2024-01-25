@@ -14,7 +14,7 @@ void parse_3_char_oper(List** main_stack, int* result, const char* str, int* i,
     }
     *i += 2;
   } else
-    *result = ERROR;
+    *result = EXIT_FAILURE;
 }
 
 void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
@@ -23,7 +23,7 @@ void parse_4_char_oper(List** main_stack, int* result, const char* str, int* i,
     push_stack(0.0, 3, type, main_stack);
     *i += 3;
   } else
-    *result = ERROR;
+    *result = EXIT_FAILURE;
 }
 
 double parse_number(const char* str, int* i, int* error) {
@@ -32,7 +32,7 @@ double parse_number(const char* str, int* i, int* error) {
   int len = 0;
   int counter = *i;
   while ((str[counter] >= '0' && str[counter] <= '9') || str[counter] == '.') {
-    if (check_double_remainder && str[counter] == '.') *error = ERROR;
+    if (check_double_remainder && str[counter] == '.') *error = EXIT_FAILURE;
     if (str[counter] == '.') check_double_remainder = 1;
     len++, counter++;
   }
@@ -97,7 +97,7 @@ void parser_switch(List** list, char* str, int* i, int* result) {
       } else if (str[*i + 1] == 'q') {
         parse_4_char_oper(list, result, str, i, SQRT, 'q', 'r', 't');
       } else
-        *result = ERROR;
+        *result = EXIT_FAILURE;
       break;
     case 't':
       parse_3_char_oper(list, result, str, i, TAN, 'a', 'n');
@@ -110,7 +110,7 @@ void parser_switch(List** list, char* str, int* i, int* result) {
       } else if (str[*i + 1] == 't') {
         parse_4_char_oper(list, result, str, i, ATAN, 't', 'a', 'n');
       } else
-        *result = ERROR;
+        *result = EXIT_FAILURE;
       break;
     case 'l':
       if (str[*i + 1] == 'o') {
@@ -119,19 +119,19 @@ void parser_switch(List** list, char* str, int* i, int* result) {
         push_stack(0.0, 3, LN, list);
         (*i)++;
       } else
-        *result = ERROR;
+        *result = EXIT_FAILURE;
       break;
     default:
-      *result = ERROR;
+      *result = EXIT_FAILURE;
   }
 }
 
 int parcer(List** list, char* str) {
-  int result = OK, i = 0;
+  int result = EXIT_SUCCESS, i = 0;
   while (str[i]) {
     if (is_number(str[i])) {
       if (str[i] == 'x') {
-        if (str[i + 1] == 'x') result = ERROR;
+        if (str[i + 1] == 'x') result = EXIT_FAILURE;
         push_stack(0.0, 0, NUM_X, list);
         i++;
       } else {
@@ -154,7 +154,7 @@ int parcer(List** list, char* str) {
   if (!result && ((p->priority > 0 && !p->next) ||
                   (tmp->value_type == MUL || tmp->value_type == SUB ||
                    tmp->value_type == MOD || tmp->value_type == EXP))) {
-    result = ERROR;
+    result = EXIT_FAILURE;
   }
   return result;
 }

@@ -21,7 +21,7 @@ void open_bracket_case(List *input, List **support, int *result) {
       (input->next->value_type == MUL || input->next->value_type == SUB ||
        input->next->value_type == EXP || input->next->value_type == MOD ||
        input->next->value_type == C_BRACKET)) {
-    *result = ERROR;
+    *result = EXIT_FAILURE;
   } else {
     push_stack(input->value, input->priority, input->value_type, support);
   }
@@ -31,7 +31,7 @@ void close_bracket_case(List *input, List **support, List **output,
                         int *result) {
   if (input->next &&
       (is_func(input->next->value_type) || input->next->value_type == NUMBER)) {
-    *result = ERROR;
+    *result = EXIT_FAILURE;
   } else {
     List *p = {0};
     p = peek_stack(*support);
@@ -51,7 +51,7 @@ void operators_case(List *input, List **support, List **output,
       (input->next->value_type == MUL || input->next->value_type == SUB ||
        input->next->value_type == MOD || input->next->value_type == EXP ||
        is_func(input->next->value_type))) {
-    *result = ERROR;
+    *result = EXIT_FAILURE;
   }
   if (p && p->priority == 5 && is_func(input->value_type)) {
     *check_negative_func = 1;
@@ -69,10 +69,10 @@ void operators_case(List *input, List **support, List **output,
 }
 
 int to_reverse_polish_notation(List *input, List **output) {
-  if (input->priority > 0 && !(input->next)) return ERROR;
+  if (input->priority > 0 && !(input->next)) return EXIT_FAILURE;
 
   int check_negative_func = 0;
-  int result = OK;
+  int result = EXIT_SUCCESS;
   List *support = {0};
   while (input) {
     if (input->value_type == NUMBER || input->value_type == NUM_X ||
