@@ -49,7 +49,8 @@ void operators_case(List *input, List **support, List **output,
   List *p = peek_stack(*support);
   if (is_func(input->value_type) &&
       (input->next->value_type == MUL || input->next->value_type == SUB ||
-       input->next->value_type == MOD || input->next->value_type == EXP)) {
+       input->next->value_type == MOD || input->next->value_type == EXP ||
+       is_func(input->next->value_type))) {
     *result = ERROR;
   }
   if (p && p->priority == 5 && is_func(input->value_type)) {

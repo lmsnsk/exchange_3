@@ -12,8 +12,10 @@ Plot::Plot(QWidget *parent) : QWidget(parent), ui(new Ui::Plot) {
   ui->rangeFrom->setText("-10");
   ui->rangeTo->setText("10");
   ui->labelCell->setText("1");
-  ui->rangeFrom->setValidator(new QIntValidator(-1000000, 1000000, this));
-  ui->rangeTo->setValidator(new QIntValidator(-1000000, 1000000, this));
+  ui->rangeFrom->setValidator(
+      new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]*")));
+  ui->rangeTo->setValidator(
+      new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]*")));
 }
 
 Plot::~Plot() { delete ui; }
@@ -140,4 +142,10 @@ void Plot::paintEvent(QPaintEvent *event) {
   } else {
     ui->IncorrectRange->show();
   }
+}
+
+void Plot::on_updatePlot_clicked() {
+  ran_x_l = ui->rangeFrom->text().toDouble();
+  ran_x_r = ui->rangeTo->text().toDouble();
+  update();
 }

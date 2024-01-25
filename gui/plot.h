@@ -26,7 +26,10 @@ class Plot : public QWidget {
  public slots:
   void slot_plot(QString str);
 
- private:
+private slots:
+  void on_updatePlot_clicked();
+
+private:
   QString check;
   double ran_x_l;
   double ran_x_r;

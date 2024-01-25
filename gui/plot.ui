@@ -43,24 +43,27 @@ QLineEdit::disabled {
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>-1</x>
+     <x>0</x>
      <y>0</y>
      <width>641</width>
-     <height>27</height>
+     <height>31</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>6</number>
+    </property>
     <item>
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="sizeType">
-       <enum>QSizePolicy::Minimum</enum>
+       <enum>QSizePolicy::Preferred</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>100</width>
+        <width>20</width>
         <height>20</height>
        </size>
       </property>
@@ -68,6 +71,18 @@ QLineEdit::disabled {
     </item>
     <item>
      <widget class="QLabel" name="label">
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>80</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>Range from:</string>
       </property>
@@ -75,13 +90,40 @@ QLineEdit::disabled {
     </item>
     <item>
      <widget class="QLineEdit" name="rangeFrom">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>20</height>
+       </size>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_2">
+      <property name="minimumSize">
+       <size>
+        <width>20</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>20</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>to:</string>
       </property>
@@ -89,13 +131,40 @@ QLineEdit::disabled {
     </item>
     <item>
      <widget class="QLineEdit" name="rangeTo">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>20</height>
+       </size>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_4">
+      <property name="minimumSize">
+       <size>
+        <width>30</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>30</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>Cell: </string>
       </property>
@@ -103,8 +172,49 @@ QLineEdit::disabled {
     </item>
     <item>
      <widget class="QLabel" name="labelCell">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="updatePlot">
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	border:1 solid black;
+}</string>
+      </property>
+      <property name="text">
+       <string>Update</string>
       </property>
      </widget>
     </item>
@@ -114,11 +224,11 @@ QLineEdit::disabled {
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="sizeType">
-       <enum>QSizePolicy::Minimum</enum>
+       <enum>QSizePolicy::Preferred</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>100</width>
+        <width>20</width>
         <height>20</height>
        </size>
       </property>

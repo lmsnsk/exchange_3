@@ -19,20 +19,20 @@ else
 endif
 
 
-all: clean gcov_report install
+# all: clean gcov_report install
 
-######################################
-# all: temp
+#####################################
+all: temp
 
-# temp:
-# 	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
+temp:
+	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
 
-# compile:
-# 	$(CC) *.c zmain/*.c $(TESTFLAGS)
+compile:
+	$(CC) *.c zmain/*.c $(TESTFLAGS)
 
-# val:
-# 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
-######################################
+val:
+	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
+#####################################
 
 install:
 	mkdir ./build

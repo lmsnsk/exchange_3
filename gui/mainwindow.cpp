@@ -5,18 +5,14 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  this->move(300, 150);
+//  this->move(300, 150);
   setWindowIcon(QIcon(":img/img/calc.ico"));
-  ui->input_x->setAlignment(Qt::AlignRight);
-  ui->inputField->setAlignment(Qt::AlignRight);
-  ui->result_field->setAlignment(Qt::AlignRight);
-  ui->memory_field->setAlignment(Qt::AlignRight);
   ui->result_field->setText("0");
-  ui->memory_field->setEnabled(false);
-  ui->input_x->setEnabled(false);
   ui->result->setCursor(QCursor(QPixmap(":img/img/cursor.png")));
   ui->input_x->setValidator(
-      new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")));
+      new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]*")));
+  pos_x = this->geometry().x();
+  pos_y = this->geometry().y();
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -74,7 +70,6 @@ void MainWindow::on_back_sp_clicked() {
 void MainWindow::on_clear_clicked() {
   ui->inputField->setText("");
   ui->result_field->setText("0");
-  ui->result_field->setStyleSheet("color: black");
   ui->input_x->setEnabled(false);
 }
 
@@ -122,10 +117,8 @@ void MainWindow::calc() {
   if (!er) {
     QString toStr = QString::number(res, 'g', 8);
     ui->result_field->setText(toStr);
-    ui->result_field->setStyleSheet("color: black");
   } else if (er == 1) {
     ui->result_field->setText("Error!");
-    ui->result_field->setStyleSheet("color: red");
   }
 }
 
@@ -138,19 +131,15 @@ void MainWindow::check_x() {
 }
 
 void MainWindow::on_plotButton_clicked() {
-  pos_x = this->geometry().x();
-  pos_y = this->geometry().y();
   credit.hide();
-  plot.move(pos_x + 388, pos_y - 24);
+//  plot.move(pos_x + 388, pos_y - 24);
   connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);
   emit signal_plot(ui->inputField->text());
   plot.show();
 }
 
 void MainWindow::on_creditButton_clicked() {
-  pos_x = this->geometry().x();
-  pos_y = this->geometry().y();
   plot.hide();
-  credit.move(pos_x + 388, pos_y - 24);
+//  credit.move(pos_x + 388, pos_y - 24);
   credit.show();
 }

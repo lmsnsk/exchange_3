@@ -106,8 +106,8 @@ int calculation(List* input, List** numbers, char* x);
 
 /// @brief функция калькулятора
 /// @param str передаваемая строка выражения
-/// @param result
-/// @param x
+/// @param result указатель на переменную с результатом
+/// @param x передаваемая строка поля ввода Х
 /// @return код ошибки (0 - вычисление прошло успешно, 1 - ошибка, 2 -
 /// передана пустая строка))
 int s21_smart_calc(char* str, double* result, char* x);
