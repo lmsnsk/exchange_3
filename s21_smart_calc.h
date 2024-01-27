@@ -32,6 +32,13 @@ typedef enum {
   LOG
 } type_t;
 
+typedef enum {
+  MONTH = 1,
+  QUARTO = 3,
+  HALF = 6,
+  YEAR = 12,
+} Cap;
+
 typedef struct List {
   double value;
   int priority;
@@ -122,3 +129,19 @@ int s21_smart_calc(char* str, double* result, char* x);
 void credit_calc(double amount, double rate_percent, int time, int type,
                  double* pay, double* total_pay, double* overpay,
                  double* first_pay);
+
+/// @brief
+/// @param deposit
+/// @param term
+/// @param rate
+/// @param nalog_rate
+/// @param payout
+/// @param capitalization
+/// @param plus
+/// @param minus
+/// @param percent
+/// @param nalog
+/// @param result
+void deposit_calc(double deposit, int term, double rate, double nalog_rate,
+                  Cap payout, int capitalization, double* plus, double* minus,
+                  double* percent, double* nalog, double* result);
