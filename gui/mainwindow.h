@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <credit.h>
+#include <deposit.h>
 #include <locale.h>
 #include <plot.h>
 
@@ -71,8 +72,9 @@ class MainWindow : public QMainWindow {
   void on_memory_c_clicked();
   void on_plotButton_clicked();
   void on_creditButton_clicked();
+  void on_depositButton_clicked();
 
-signals:
+ signals:
   void signal_plot(QString str);
 
  private:
@@ -83,6 +85,7 @@ signals:
   Ui::MainWindow *ui;
   Plot plot;
   Credit credit;
+  Deposit deposit;
   void print_in_field(QString str);
   void check_x();
   void calc();

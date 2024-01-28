@@ -10,10 +10,12 @@ CONFIG += c++11
 
 SOURCES += \
     credit.cpp \
+    deposit.cpp \
     main.cpp \
     mainwindow.cpp \
     ../calculation.c \
     ../credit_calc.c \
+    ../deposit_calc.c \
     ../list.c \
     ../parcer.c \
     ../polish_notation.c \
@@ -23,12 +25,14 @@ SOURCES += \
 
 HEADERS += \
     credit.h \
+    deposit.h \
     mainwindow.h \
     ../s21_smart_calc.h \
     plot.h
 
 FORMS += \
     credit.ui \
+    deposit.ui \
     mainwindow.ui \
     plot.ui
 

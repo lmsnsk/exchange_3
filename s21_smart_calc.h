@@ -32,19 +32,17 @@ typedef enum {
   LOG
 } type_t;
 
-typedef enum {
-  MONTH = 1,
-  QUARTO = 3,
-  HALF = 6,
-  YEAR = 12,
-} Cap;
-
 typedef struct List {
   double value;
   int priority;
   type_t value_type;
   struct List* next;
 } List;
+
+typedef struct Change_deposit {
+  double value;
+  int term;
+} Change;
 
 void print_stack(List* stack);
 void print_stack_str(List* stack);
@@ -142,6 +140,6 @@ void credit_calc(double amount, double rate_percent, int time, int type,
 /// @param percent
 /// @param nalog
 /// @param result
-void deposit_calc(double deposit, int term, double rate, double nalog_rate,
-                  Cap payout, int capitalization, double* plus, double* minus,
-                  double* percent, double* nalog, double* result);
+int deposit_calc(double deposit, int term, double rate, double nalog_rate,
+                 int payout, int capitalization, Change* plus, Change* minus,
+                 double* percent, double* nalog, double* result);

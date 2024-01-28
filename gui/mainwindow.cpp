@@ -5,7 +5,7 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-//  this->move(300, 150);
+  //  this->move(300, 150);
   setWindowIcon(QIcon(":img/img/calc.ico"));
   ui->result_field->setText("0");
   ui->result->setCursor(QCursor(QPixmap(":img/img/cursor.png")));
@@ -132,7 +132,8 @@ void MainWindow::check_x() {
 
 void MainWindow::on_plotButton_clicked() {
   credit.hide();
-//  plot.move(pos_x + 388, pos_y - 24);
+  deposit.hide();
+  //  plot.move(pos_x + 388, pos_y - 24);
   connect(this, &MainWindow::signal_plot, &plot, &Plot::slot_plot);
   emit signal_plot(ui->inputField->text());
   plot.show();
@@ -140,6 +141,14 @@ void MainWindow::on_plotButton_clicked() {
 
 void MainWindow::on_creditButton_clicked() {
   plot.hide();
-//  credit.move(pos_x + 388, pos_y - 24);
+  deposit.hide();
+  //  credit.move(pos_x + 388, pos_y - 24);
   credit.show();
+}
+
+void MainWindow::on_depositButton_clicked() {
+  credit.hide();
+  plot.hide();
+  //  deposit.move(pos_x + 388, pos_y - 24);
+  deposit.show();
 }

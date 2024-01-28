@@ -247,6 +247,14 @@ QLineEdit::disabled {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>loanAmountInput</tabstop>
+  <tabstop>timeInput</tabstop>
+  <tabstop>rateInput</tabstop>
+  <tabstop>equalRBtn</tabstop>
+  <tabstop>differentRBtn</tabstop>
+  <tabstop>calculateButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
