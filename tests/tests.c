@@ -306,7 +306,9 @@ void run_testcase(Suite *testcase) {
 }
 
 int main(void) {
+  printf("===========================================\n");
   run_testcase(suite_calc());
+  printf("\n===========================================\n\n");
 
   return 0;
 }

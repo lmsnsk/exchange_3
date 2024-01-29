@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 void credit_calc(double amount, double rate_percent, int time, int type,
                  double *pay, double *total_pay, double *overpay,

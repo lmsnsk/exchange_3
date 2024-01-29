@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 int is_number(int c) {
   int result = 0;

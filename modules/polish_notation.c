@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 int is_func(int val) {
   int result = 0;

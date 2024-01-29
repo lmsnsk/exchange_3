@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 void execution_un_operator(List** numbers, int type) {
   List* p = peek_stack(*numbers);

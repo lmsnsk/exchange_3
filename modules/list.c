@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 void push_stack(double value, int priority, type_t value_type, List** root) {
   List* tmp = (List*)calloc(1, sizeof(List));

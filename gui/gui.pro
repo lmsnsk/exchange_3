@@ -13,13 +13,13 @@ SOURCES += \
     deposit.cpp \
     main.cpp \
     mainwindow.cpp \
-    ../calculation.c \
-    ../credit_calc.c \
-    ../deposit_calc.c \
-    ../list.c \
-    ../parcer.c \
-    ../polish_notation.c \
-    ../validator.c \
+    ../modules/calculation.c \
+    ../modules/credit_calc.c \
+    ../modules/deposit_calc.c \
+    ../modules/list.c \
+    ../modules/parcer.c \
+    ../modules/polish_notation.c \
+    ../modules/validator.c \
     ../s21_smart_calc.c \
     plot.cpp
 

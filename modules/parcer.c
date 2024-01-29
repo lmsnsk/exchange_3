@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 void parse_3_char_oper(List** main_stack, int* result, const char* str, int* i,
                        type_t type, char c1, char c2) {

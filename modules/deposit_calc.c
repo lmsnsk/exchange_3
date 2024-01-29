@@ -1,4 +1,4 @@
-#include "s21_smart_calc.h"
+#include "../s21_smart_calc.h"
 
 int deposit_calc(double deposit, int term, double rate, double nalog_rate,
                  int payout, int capitalization, Change plus, Change minus,

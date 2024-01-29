@@ -2,6 +2,7 @@ TARGET=SmartCalc
 FLAGS=-Wall -Werror -Wextra -std=c11
 CC=gcc $(FLAGS)
 FILE=s21_calc
+MODULES=modules/*
 FILETEST=tests/*
 FILEREPORT=s21_test_report
 FILETESTO=s21_test
@@ -19,19 +20,19 @@ else
 endif
 
 
-# all: clean gcov_report install
+all: clean gcov_report install
 
 #####################################
-all: temp
+# all: temp
 
-temp:
-	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
+# temp:
+# 	$(CC) -fsanitize=address -g *.c  zmain/*.c $(TESTFLAGS)
 
-compile:
-	$(CC) *.c zmain/*.c $(TESTFLAGS)
+# compile:
+# 	$(CC) *.c zmain/*.c $(TESTFLAGS)
 
-val:
-	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
+# val:
+# 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s ./a.out
 #####################################
 
 install:
@@ -46,7 +47,7 @@ uninstall:
 dist:
 	mkdir dist
 	mkdir dist/src
-	cp -r gui/ tests/ Makefile *.c *.h dist/src/
+	cp -r gui/ tests/ modules/ Makefile *.c *.h *.html dist/src/
 	cd ./dist && tar cvzf $(TARGET)_v1.0.tgz *
 	rm -rf dist/src/
 
@@ -54,16 +55,16 @@ dvi:
 	$(OPEN_CMD) s21_smart_calc.html
 
 test: 
-	$(CC) $(FILETEST).c *.c -o $(FILETESTO) $(TESTFLAGS)
+	$(CC) $(FILETEST).c *.c $(MODULES).c -o $(FILETESTO) $(TESTFLAGS)
 	./$(FILETESTO)
 
 test_val: 
-	$(CC) $(FILETEST).c *.c -o $(FILETESTO) $(TESTFLAGS)
+	$(CC) $(FILETEST).c *.c $(MODULES).c -o $(FILETESTO) $(TESTFLAGS)
 	valgrind --tool=memcheck --log-file="valgrind_check.log" --leak-check=yes \
 	--track-origins=yes -s ./$(FILETESTO)
 
 gcov_report:
-	$(CC) $(COVFLAG) $(FILETEST).c *.c -o $(FILEREPORT) $(TESTFLAGS)
+	$(CC) $(COVFLAG) $(FILETEST).c *.c $(MODULES).c -o $(FILEREPORT) $(TESTFLAGS)
 	./$(FILEREPORT)
 	lcov -t "$(FILE)" -o test.info -c -d .  
 	genhtml -o $(DIRREPORT) test.info
@@ -73,16 +74,15 @@ gcov_report:
 rep: gcov_report
 
 clean:
-	rm -rf *.o *.a *.gcno *.gcda *.info *.log $(DIRREPORT) \
-	$(FILETESTO) $(FILEREPORT) ./build* ./dist
+	rm -rf *.o *.a *.gcno *.gcda *.info *.log $(DIRREPORT) $(FILETESTO) $(FILEREPORT) ./build* ./dist
 
 #style
 cpp:
-	cppcheck --enable=all --suppress=missingIncludeSystem *.c *.h
+	cppcheck --enable=all --suppress=missingIncludeSystem *.c *.h $(MODULES).c
 
 clang:
 	cp ../materials/linters/.clang-format .clang-format
-	clang-format -n *.c *.h
+	clang-format -n *.c *.h $(MODULES).c
 	rm -rf .clang-format
 
 check: cpp clang
