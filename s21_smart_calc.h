@@ -41,7 +41,7 @@ typedef struct List {
 
 typedef struct Change_deposit {
   double value;
-  int term;
+  int amount;
 } Change;
 
 void print_stack(List* stack);
@@ -128,18 +128,18 @@ void credit_calc(double amount, double rate_percent, int time, int type,
                  double* pay, double* total_pay, double* overpay,
                  double* first_pay);
 
-/// @brief
-/// @param deposit
-/// @param term
-/// @param rate
-/// @param nalog_rate
-/// @param payout
-/// @param capitalization
-/// @param plus
-/// @param minus
-/// @param percent
-/// @param nalog
-/// @param result
+/// @brief функция калькулятора вкладов
+/// @param deposit сумма вклада
+/// @param term срок размещения вклада
+/// @param rate процентная ставка по вкладу
+/// @param nalog_rate максимальная ключевая ставка
+/// @param payout периодичность капитализациии
+/// @param capitalization флаг капитализации
+/// @param plus пополнения вклада
+/// @param minus снятия со склада
+/// @param percent начисленные проценты
+/// @param nalog сумма налога
+/// @param result итоговыая сумма с процентами
 int deposit_calc(double deposit, int term, double rate, double nalog_rate,
-                 int payout, int capitalization, Change* plus, Change* minus,
+                 int payout, int capitalization, Change plus, Change minus,
                  double* percent, double* nalog, double* result);

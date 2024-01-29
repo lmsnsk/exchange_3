@@ -62,12 +62,25 @@ QLineEdit::disabled {
        <height>30</height>
       </size>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="focusPolicy">
       <enum>Qt::TabFocus</enum>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
 	border:1px solid black;
+}
+
+QPushButton::hover {
+	background-color: rgb(189, 218, 255);
+}
+
+QPushButton::pressed {
+	background-color:rgb(219, 229, 243);
 }</string>
      </property>
      <property name="text">

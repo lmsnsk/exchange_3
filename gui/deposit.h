@@ -21,11 +21,14 @@ class Deposit : public QWidget {
 
  private slots:
   void on_calculate_clicked();
-  void on_comboBox_activated(int);
+  void on_comboBox_activated(int index);
   void on_capitalizationCheckBox_clicked();
+  void on_plus_minus_checkBox_clicked();
+  void on_plusBox_activated(int index);
+  void on_minusBox_activated(int index);
 
  private:
-  int payout;
+  int payout, plus_check, minus_check;
   Ui::Deposit *ui;
 };
 

@@ -1,5 +1,7 @@
 #include "deposit.h"
 
+#include <QDebug>
+
 #include "ui_deposit.h"
 
 extern "C" {
@@ -17,10 +19,14 @@ Deposit::Deposit(QWidget* parent) : QWidget(parent), ui(new Ui::Deposit) {
       new QRegExpValidator(QRegExp("[0-9]{0,3}\\.?[0-9]?")));
   ui->nalogInput->setValidator(
       new QRegExpValidator(QRegExp("[0-9]{0,3}\\.?[0-9]?")));
+  ui->plusInput->setValidator(
+      new QRegExpValidator(QRegExp("[0-9]*\\.?[0-9]*")));
+  ui->minusInput->setValidator(
+      new QRegExpValidator(QRegExp("[0-9]*\\.?[0-9]*")));
   ui->percentResult->setText("0");
   ui->nalogResult->setText("0");
   ui->mainResult->setText("0");
-  payout = 1;
+  payout = 1, minus_check = 0, plus_check = 0;
 }
 
 Deposit::~Deposit() { delete ui; }
@@ -29,14 +35,21 @@ void Deposit::on_calculate_clicked() {
   setlocale(LC_ALL, "C");
 
   int error = 0;
+  Change plus, minus;
   double percent, nalog, result;
+  plus.value = 0, minus.value = 0;
+  int term = ui->termInput->text().toInt();
   double value = ui->valueInput->text().toDouble();
-  double term = ui->termInput->text().toDouble();
   double rate = ui->rateInput->text().toDouble();
   double nalog_rate = ui->nalogInput->text().toDouble();
   int capitalization = ui->capitalizationCheckBox->isChecked() ? 1 : 0;
-  Change plus[128] = {0};
-  Change minus[128] = {0};
+
+  plus.amount = plus_check;
+  minus.amount = minus_check;
+
+  plus.value = ui->plusInput->text().toDouble();
+  minus.value = ui->minusInput->text().toDouble();
+
   error = deposit_calc(value, term, rate, nalog_rate, payout, capitalization,
                        plus, minus, &percent, &nalog, &result);
   if (!error) {
@@ -61,6 +74,44 @@ void Deposit::on_comboBox_activated(int index) {
     payout = 12;
 }
 
+void Deposit::on_plusBox_activated(int index) {
+  if (index == 0) {
+    plus_check = 0;
+    ui->plusInput->setEnabled(false);
+  } else if (index == 1) {
+    ui->plusInput->setEnabled(true);
+    plus_check = 1;
+  } else if (index == 2) {
+    ui->plusInput->setEnabled(true);
+    plus_check = 3;
+  } else if (index == 3) {
+    ui->plusInput->setEnabled(true);
+    plus_check = 6;
+  } else if (index == 4) {
+    ui->plusInput->setEnabled(true);
+    plus_check = 12;
+  }
+}
+
+void Deposit::on_minusBox_activated(int index) {
+  if (index == 0) {
+    minus_check = 0;
+    ui->minusInput->setEnabled(false);
+  } else if (index == 1) {
+    ui->minusInput->setEnabled(true);
+    minus_check = 1;
+  } else if (index == 2) {
+    ui->minusInput->setEnabled(true);
+    minus_check = 3;
+  } else if (index == 3) {
+    ui->minusInput->setEnabled(true);
+    minus_check = 6;
+  } else if (index == 4) {
+    ui->minusInput->setEnabled(true);
+    minus_check = 12;
+  }
+}
+
 void Deposit::on_capitalizationCheckBox_clicked() {
   if (ui->capitalizationCheckBox->isChecked()) {
     ui->label_3->setEnabled(true);
@@ -68,5 +119,29 @@ void Deposit::on_capitalizationCheckBox_clicked() {
   } else {
     ui->label_3->setEnabled(false);
     ui->comboBox->setEnabled(false);
+  }
+}
+
+void Deposit::on_plus_minus_checkBox_clicked() {
+  if (ui->plus_minus_checkBox->isChecked()) {
+    ui->label_10->setEnabled(true);
+    ui->label_11->setEnabled(true);
+    ui->label_12->setEnabled(true);
+    ui->label_13->setEnabled(true);
+    if (plus_check) ui->plusInput->setEnabled(true);
+    if (minus_check) ui->minusInput->setEnabled(true);
+    ui->plusBox->setEnabled(true);
+    ui->minusBox->setEnabled(true);
+  } else {
+    ui->plusInput->setText("");
+    ui->minusInput->setText("");
+    ui->label_10->setEnabled(false);
+    ui->label_11->setEnabled(false);
+    ui->label_12->setEnabled(false);
+    ui->label_13->setEnabled(false);
+    ui->plusInput->setEnabled(false);
+    ui->minusInput->setEnabled(false);
+    ui->plusBox->setEnabled(false);
+    ui->minusBox->setEnabled(false);
   }
 }

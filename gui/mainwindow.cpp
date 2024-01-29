@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget* parent)
   ui->result->setCursor(QCursor(QPixmap(":img/img/cursor.png")));
   ui->input_x->setValidator(
       new QRegExpValidator(QRegExp("[-+]?[0-9]*\\.?[0-9]*")));
-  pos_x = this->geometry().x();
-  pos_y = this->geometry().y();
+//  pos_x = this->geometry().x();
+//  pos_y = this->geometry().y();
 }
 
 MainWindow::~MainWindow() { delete ui; }

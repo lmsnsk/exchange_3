@@ -140,6 +140,133 @@ START_TEST(test_test_credit_2) {
 }
 END_TEST
 
+START_TEST(test_test_deposit_1) {
+  double deposit = 1000000;
+  int term = 12;
+  double rate = 8.5;
+  double nalog_rate = 10;
+  int payout = 12;
+  Change plus = {50000, 1};
+  Change minus = {20000, 1};
+  double percent, nalog, result;
+  int capitalization = 0;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(percent, 96687.50, 1);
+  ck_assert_double_eq_tol(result, 1426687.50, 1);
+  ck_assert_double_eq_tol(nalog, 0, 1);
+}
+END_TEST
+
+START_TEST(test_test_deposit_2) {
+  double deposit = 1000000;
+  int term = 12;
+  double rate = 8.5;
+  double nalog_rate = 10;
+  int payout = 1;
+  int capitalization = 1;
+  Change plus = {50000, 3};
+  Change minus = {20000, 3};
+  double percent, nalog, result;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(percent, 91637.82, 1);
+  ck_assert_double_eq_tol(result, 1181637.82, 1);
+  ck_assert_double_eq_tol(nalog, 0, 1);
+}
+END_TEST
+
+START_TEST(test_test_deposit_3) {
+  double deposit = 0;
+  int term = 12;
+  double rate = 8.5;
+  double nalog_rate = 10;
+  int payout = 1;
+  int capitalization = 1;
+  Change plus = {50000, 3};
+  Change minus = {20000, 3};
+  double percent, nalog, result;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 1);
+}
+END_TEST
+
+START_TEST(test_test_deposit_4) {
+  double deposit = 1000000;
+  int term = 12;
+  double rate = 8.5;
+  double nalog_rate = 10;
+  int payout = 3;
+  int capitalization = 1;
+  Change plus = {50000, 6};
+  Change minus = {20000, 6};
+  double percent, nalog, result;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(percent, 88385.46, 1);
+  ck_assert_double_eq_tol(result, 1118385.46, 1);
+  ck_assert_double_eq_tol(nalog, 0, 1);
+}
+END_TEST
+
+START_TEST(test_test_deposit_5) {
+  double deposit = 1000000;
+  int term = 36;
+  double rate = 8.5;
+  double nalog_rate = 10;
+  int payout = 6;
+  int capitalization = 1;
+  Change plus = {50000, 12};
+  Change minus = {20000, 12};
+  double percent, nalog, result;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(percent, 288943.70, 1);
+  ck_assert_double_eq_tol(result, 1348943.70, 1);
+  ck_assert_double_eq_tol(nalog, 1993.06, 1);
+}
+END_TEST
+
+START_TEST(test_test_deposit_6) {
+  double deposit = 1000000;
+  int term = 15;
+  double rate = 15;
+  double nalog_rate = 5;
+  int payout = 12;
+  int capitalization = 1;
+  Change plus = {0, 0};
+  Change minus = {0, 0};
+  double percent, nalog, result;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 0);
+  ck_assert_double_eq_tol(percent, 322500.00, 1);
+  ck_assert_double_eq_tol(result, 1322500.00, 1);
+  ck_assert_double_eq_tol(nalog, 28925.00, 1);
+}
+END_TEST
+
+START_TEST(test_test_deposit_7) {
+  double deposit = 1000000;
+  int term = 15;
+  double rate = 15;
+  double nalog_rate = 5;
+  int payout = 12;
+  int capitalization = 1;
+  Change plus = {0, 0};
+  Change minus = {2000000, 1};
+  double percent, nalog, result;
+  int er = deposit_calc(deposit, term, rate, nalog_rate, payout, capitalization,
+                        plus, minus, &percent, &nalog, &result);
+  ck_assert_int_eq(er, 1);
+}
+END_TEST
+
 Suite *suite_calc(void) {
   Suite *s = suite_create("suite_calc");
   TCase *tc = tcase_create("case_calc");
@@ -156,6 +283,13 @@ Suite *suite_calc(void) {
   tcase_add_test(tc, test_test_8);
   tcase_add_test(tc, test_test_credit_1);
   tcase_add_test(tc, test_test_credit_2);
+  tcase_add_test(tc, test_test_deposit_1);
+  tcase_add_test(tc, test_test_deposit_2);
+  tcase_add_test(tc, test_test_deposit_3);
+  tcase_add_test(tc, test_test_deposit_4);
+  tcase_add_test(tc, test_test_deposit_5);
+  tcase_add_test(tc, test_test_deposit_6);
+  tcase_add_test(tc, test_test_deposit_7);
 
   suite_add_tcase(s, tc);
   return s;
